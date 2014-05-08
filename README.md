@@ -34,10 +34,62 @@ to be configured for each new `Client`.
       config.product_secret_key = 'PRODUCT_SECRET_KEY'
     end
 
-### Make some Requests
+## APIs
+
+### Category API
+
+The Category API will allow you to access the categories for an Ecwid store.
+An instance of the Category API is available on the client.
+
+    api = client.categories
+    # => #<EcwidApi::CategoryApi>
+
+    api.all
+    # Returns an Array of all of the `EcwidApi::Category` objects
+
+    api.root
+    # Returns an Array of the top-level `EcwidApi::Category` objects for the
+    # store
+
+    api.find(123)
+    # Returns the `EcwidApi::Category` with an ID of 123
+
+#### EcwidApi::Category Objects
+
+The properties of an `EcwidApi::Category` object can be accessed using the `[]`
+method, or with special snake_cased helper methods.
+
+    cat = client.categories.find(123)
+    # An example response from the API
+    # {
+    #   "id": 123,
+    #   "parentId": 456,
+    #   "name": "Special Category"
+    # }
+
+    cat[:id]          # Access with a Symbol
+    # => 123
+
+    cat["parentId"]   # Access with a String (case sensitive)
+    # => 456
+
+    cat.parent_id     # Access with a snake_case method
+    # => 456
+
+Each `EcwidApi::Category` also has methods to find any sub-categories, and the
+parent category, if there is one.
+
+    cat.parent
+    # Returns the parent `EcwidApi::Category`
+
+    cat.sub_categories
+    # Returns an Array of `EcwidApi::Category`
+
+### Making Ad-Hoc Requests with the Client
 
 To make a request, simply call the `#get` method on the client passing in the
-API and any parameters it requires. For example, to get some categories:
+relative path and any parameters it requires.
+For example, to get some categories:
 
     # GET https://app.ecwid.com/api/v1/[STORE-ID]/categories?parent=1
 
@@ -46,16 +98,16 @@ API and any parameters it requires. For example, to get some categories:
     # => #<Faraday::Response>
 
 The `Client` is responsible for making raw requests, which is why it returns
-a `Faraday::Response`. Eventually there will be a domain model to bury this
-detail under an abstraction. In the meantime, please see the
-[Faraday documentation](https://github.com/lostisland/faraday)
-to learn how to use the `Faraday::Response` object.
+a `Faraday::Response`. The JSON parsing middleware is also active on the Faraday
+connection, so calling `Faraday::Response#body` will return a Hash of the parsed
+JSON.
 
 ### Ecwid API Documentation
 
 The [Ecwid API documentation](http://kb.ecwid.com/w/page/25232810/API)
-should give you a good idea of what is possible to retreive. Please note that
-resources requiring the secret keys will be inaccessible until we implement
+should give you a good idea of what is possible to retreive. It also defines
+which properties are available on each of the entities it provies. Please note
+that resources requiring the secret keys will be inaccessible until we implement
 that feature.
 
 ## Contributing

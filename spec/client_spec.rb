@@ -31,21 +31,9 @@ describe EcwidApi::Client do
     its(:store_url) { "http://app.ecwid.com/api/v1/12345" }
   end
 
-  describe "#get" do
-    let(:faraday_stubs) do
-      Faraday::Adapter::Test::Stubs.new do |stub|
-        stub.get('categories') { [200, {}, '[]'] }
-      end
-    end
-
-    let(:faraday) do
-      Faraday::new do |builder|
-        builder.adapter :test, faraday_stubs
-      end
-    end
-
+  describe "#get", faraday: true do
     before(:each) do
-      allow(subject).to receive(:connection).and_return(faraday)
+      faraday_client(subject)
     end
 
     it "delegates to the Faraday connection" do

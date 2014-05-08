@@ -1,4 +1,5 @@
 require 'faraday'
+require 'faraday_middleware'
 
 module EcwidApi
   # Public: Client objects manage the connection and interface to a single Ecwid
@@ -69,6 +70,11 @@ module EcwidApi
       connection.get(path, params)
     end
 
+    # Public: Returns the Category API
+    def categories
+      @categories ||= CategoryApi.new(self)
+    end
+
     private
 
     # Private: Resets the connection.
@@ -80,7 +86,10 @@ module EcwidApi
 
     # Private: Returns a Faraday connection to interface with the Ecwid API
     def connection
-      @connection ||= Faraday.new(url: store_url)
+      @connection ||= Faraday.new store_url do |conn|
+        conn.response :json, content_type: /\bjson$/
+        conn.adapter  Faraday.default_adapter
+      end
     end
   end
 end

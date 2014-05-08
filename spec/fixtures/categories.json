@@ -1,0 +1,22 @@
+[
+  {
+    "id": 9389012,
+    "name": "Bariatric Products",
+    "url": "http://www.example.com#!/~/category/id=9389012",
+    "productCount": 98
+  },
+  {
+    "id": 9389013,
+    "parentId": 9389012,
+    "name": "Aids for Daily Living",
+    "url": "http://www.example.com#!/~/category/id=9389013",
+    "productCount": 72
+  },
+  {
+    "id": 9389106,
+    "parentId": 9389012,
+    "name": "Mobility",
+    "url": "http://www.example.com#!/~/category/id=9389106",
+    "productCount": 12
+  }
+]

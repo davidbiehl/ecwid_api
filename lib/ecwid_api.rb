@@ -1,4 +1,5 @@
 require "ecwid_api/version"
+require "ext/string"
 
 # Public: This is the main namespace for the EcwidApi. It can be used to store
 # the default client.
@@ -6,6 +7,10 @@ require "ecwid_api/version"
 module EcwidApi
   autoload :Client, "ecwid_api/client"
   autoload :Error, "ecwid_api/error"
+  autoload :Entity, "ecwid_api/entity"
+
+  autoload :CategoryApi, "ecwid_api/category_api"
+  autoload :Category, "ecwid_api/category"
 
   class << self
     # Public: Gets and configures a default client
