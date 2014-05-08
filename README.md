@@ -2,6 +2,8 @@
 
 A gem to interface with the Ecwid REST APIs.
 
+[![Code Climate](https://codeclimate.com/github/davidbiehl/ecwid_api.png)](https://codeclimate.com/github/davidbiehl/ecwid_api)
+
 ## Installation
 
 Add this line to your application's Gemfile:
