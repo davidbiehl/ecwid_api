@@ -2,11 +2,11 @@ module EcwidApi
   class Entity
     # Private: Gets the Client
     attr_reader :client
-    private :client
+    private     :client
 
     # Private: Gets the Hash of data
     attr_reader :data
-    private :data
+    private     :data
 
     # Public: Initialize a new entity with a reference to the client and data
     #

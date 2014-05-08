@@ -4,7 +4,7 @@ module EcwidApi
   class CategoryApi
     # Private: Gets the Client
     attr_reader :client
-    private :client
+    private     :client
 
     # Public: Initializes a new EcwidApi::CategoryApi
     #
