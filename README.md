@@ -36,28 +36,14 @@ to be configured for each new `Client`.
 
 ## APIs
 
-### Category API
+### Entities
 
-The Category API will allow you to access the categories for an Ecwid store.
-An instance of the Category API is available on the client.
-
-    api = client.categories
-    # => #<EcwidApi::CategoryApi>
-
-    api.all
-    # Returns an Array of all of the `EcwidApi::Category` objects
-
-    api.root
-    # Returns an Array of the top-level `EcwidApi::Category` objects for the
-    # store
-
-    api.find(123)
-    # Returns the `EcwidApi::Category` with an ID of 123
-
-#### EcwidApi::Category Objects
-
-The properties of an `EcwidApi::Category` object can be accessed using the `[]`
-method, or with special snake_cased helper methods.
+Instead of returning raw JSON from the API, there are Entities that will help
+you work with the data. The [Ecwid API](http://kb.ecwid.com/w/page/25232810/API)
+will give you all of the fields that are available for every entity. Our
+Entities will give you access to the data with the `[]` method, or a snake_case
+version of the property name. For example, with an `EcwidApi::Category` the
+following would be possible:
 
     cat = client.categories.find(123)
     # An example response from the API
@@ -76,7 +62,27 @@ method, or with special snake_cased helper methods.
     cat.parent_id     # Access with a snake_case method
     # => 456
 
-Each `EcwidApi::Category` also has methods to find any sub-categories, and the
+### Category API
+
+The Category API will allow you to access the categories for an Ecwid store.
+An instance of the Category API is available on the client.
+
+    api = client.categories
+    # => #<EcwidApi::CategoryApi>
+
+    api.all
+    # Returns an Array of all of the `EcwidApi::Category` objects
+
+    api.root
+    # Returns an Array of the top-level `EcwidApi::Category` objects for the
+    # store
+
+    api.find(123)
+    # Returns the `EcwidApi::Category` with an ID of 123
+
+#### EcwidApi::Category Entities
+
+Each `EcwidApi::Category` has methods to find sub-categories and the
 parent category, if there is one.
 
     cat.parent
@@ -84,6 +90,38 @@ parent category, if there is one.
 
     cat.sub_categories
     # Returns an Array of `EcwidApi::Category`
+
+### Order API
+
+The Order API will allow you to access the orders that have been placed in an
+Ecwid store. An instance of the Order API is available to the client
+
+    api = client.orders
+
+    api.all
+    # Returns a `PagedEnumerator` containing all of the orders for the store
+
+    api.all({date: "1982-05-17"})
+    # Paremters can be passed as a Hash.
+    # See http://kb.ecwid.com/w/page/43697230/Order%20API#Parameters for
+    # a list of available parameters
+
+    api.find(123)
+    # Returns an `EcwidApi::Order` object for order 123
+
+#### EcwidApi::Order Entities
+
+There are a few helper methods on the `EcwidApi::Order` that assist in accessing
+related Entities.
+
+    order.billing_person
+    # Returns a EcwidApi::Person
+
+    order.shipping_person
+    # Returns an EcwidApi::Person
+
+    order.items
+    # Returns an Array of EcwidApi::OrderItem objects
 
 ### Making Ad-Hoc Requests with the Client
 

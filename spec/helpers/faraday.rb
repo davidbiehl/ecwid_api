@@ -3,7 +3,7 @@ require 'faraday'
 module Helpers
   module Faraday
     def fixtures
-      %w(categories category)
+      %w(categories category orders)
     end
 
     def faraday_stubs

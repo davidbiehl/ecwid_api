@@ -75,6 +75,11 @@ module EcwidApi
       @categories ||= CategoryApi.new(self)
     end
 
+    # Public: Returns the Order API
+    def orders
+      @orders ||= OrderApi.new(self)
+    end
+
     private
 
     # Private: Resets the connection.
