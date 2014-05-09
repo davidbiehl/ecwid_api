@@ -9,6 +9,7 @@ module EcwidApi
   autoload :Error, "ecwid_api/error"
   autoload :Entity, "ecwid_api/entity"
   autoload :PagedEnumerator, "ecwid_api/paged_enumerator"
+  autoload :Api, "ecwid_api/api"
 
   autoload :CategoryApi, "ecwid_api/category_api"
   autoload :Category, "ecwid_api/category"

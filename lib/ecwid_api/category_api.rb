@@ -1,20 +1,7 @@
 module EcwidApi
   # Public: This is the Ecwid API for Categories. It abstracts the end-points
   # of the Ecwid API that deal with categories.
-  class CategoryApi
-    # Private: Gets the Client
-    attr_reader :client
-    private     :client
-
-    # Public: Initializes a new EcwidApi::CategoryApi
-    #
-    # client - The EcwidApi::Client to use with the API
-    #
-    def initialize(client = EcwidApi.default_client)
-      @client = client
-      raise Error.new("The client cannot be nil") unless client
-    end
-
+  class CategoryApi < Api
     # Public: Returns all of the sub-categories for a given category
     #
     # See: http://kb.ecwid.com/w/page/25285101/Product%20API#RESTAPIMethodcategories
