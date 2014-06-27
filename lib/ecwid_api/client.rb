@@ -70,6 +70,16 @@ module EcwidApi
       connection.get(path, params)
     end
 
+    # Public: Sends a POST request to the Ecwid API
+    #
+    # path - The String path for the URL of the request without the base URL
+    # params - A Hash of query string parameters
+    #
+    # Returns a Faraday::Response
+    def post(path, params={})
+      connection.post(path, params)
+    end
+
     # Public: Returns the Category API
     def categories
       @categories ||= CategoryApi.new(self)
@@ -92,6 +102,7 @@ module EcwidApi
     # Private: Returns a Faraday connection to interface with the Ecwid API
     def connection
       @connection ||= Faraday.new store_url do |conn|
+        conn.request  :url_encoded
         conn.response :json, content_type: /\bjson$/
         conn.adapter  Faraday.default_adapter
       end

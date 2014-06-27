@@ -51,4 +51,14 @@ describe EcwidApi::Order do
       subject.items.first.sku.should == "112233"
     end
   end
+
+  describe "#fulfillment_status=" do
+    it "raises an error with an invalid status" do
+      expect { subject.fulfillment_status = :stuff }.to raise_error
+    end
+
+    it "doesn't raise an error with a valid status" do
+      expect { subject.fulfillment_status = :processing }.to_not raise_error
+    end
+  end
 end

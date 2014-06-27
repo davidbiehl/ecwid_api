@@ -123,6 +123,13 @@ related Entities.
     order.items
     # Returns an Array of EcwidApi::OrderItem objects
 
+The fulfillment status and shipping tracking code can also be updated for an
+`EcwidApi::Order` object.
+
+    order.fulfillment_status = :processing
+    order.shipping_tracking_code = "1Z1234567890"
+    order.save
+
 ### Making Ad-Hoc Requests with the Client
 
 To make a request, simply call the `#get` method on the client passing in the
