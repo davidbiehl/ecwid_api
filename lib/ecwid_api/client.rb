@@ -90,6 +90,11 @@ module EcwidApi
       @orders ||= OrderApi.new(self)
     end
 
+    # Public: Returns the Products API
+    def products
+      @products ||= ProductApi.new(self)
+    end
+
     private
 
     # Private: Resets the connection.

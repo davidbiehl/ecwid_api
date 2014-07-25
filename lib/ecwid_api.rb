@@ -19,6 +19,9 @@ module EcwidApi
   autoload :OrderItem, "ecwid_api/order_item"
   autoload :Person, "ecwid_api/person"
 
+  autoload :ProductApi, "ecwid_api/product_api"
+  autoload :Product,    "ecwid_api/product"
+
   class << self
     # Public: Gets and configures a default client
     #
