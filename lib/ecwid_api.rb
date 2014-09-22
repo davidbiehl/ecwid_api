@@ -1,10 +1,13 @@
 require "ecwid_api/version"
 require "ext/string"
+require 'faraday'
+require 'faraday_middleware'
 
 # Public: This is the main namespace for the EcwidApi. It can be used to store
 # the default client.
 #
 module EcwidApi
+  autoload :Authentication, "ecwid_api/authentication"
   autoload :Client, "ecwid_api/client"
   autoload :Error, "ecwid_api/error"
   autoload :Entity, "ecwid_api/entity"
