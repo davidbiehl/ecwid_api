@@ -2,33 +2,14 @@ require "spec_helper"
 
 describe EcwidApi::Client do
   subject do
-    EcwidApi::Client.new do |config|
-      config.store_id = store_id
-    end
+    EcwidApi::Client.new(store_id, token)
   end
+
   let(:store_id) { 12345 }
-
-  context "without a store_id" do
-    it "raises an error" do
-      expect { EcwidApi::Client.new }.to raise_error(EcwidApi::Error, /store_id/)
-    end
-  end
-
-  describe "#url" do
-    its(:url) { "http://app.ecwid.com/api/v1" }
-
-    it "can be overridden" do
-      client = EcwidApi::Client.new do |config|
-        config.store_id = store_id
-        config.url = "http://ladida.com"
-      end
-
-      client.url.should == "http://ladida.com"
-    end
-  end
+  let(:token)    { "some token thing" }
 
   describe "#store_url" do
-    its(:store_url) { "http://app.ecwid.com/api/v1/12345" }
+    its(:store_url) { "http://app.ecwid.com/api/v3/12345" }
   end
 
   describe "#get", faraday: true do
