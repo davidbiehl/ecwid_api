@@ -7,7 +7,7 @@ require 'faraday_middleware'
 # the default client.
 #
 module EcwidApi
-  autoload :Authentication, "ecwid_api/authentication"
+  autoload :OAuth, "ecwid_api/o_auth"
   autoload :Client, "ecwid_api/client"
   autoload :Error, "ecwid_api/error"
   autoload :ResponseError, "ecwid_api/error"

@@ -1,10 +1,12 @@
+require "cgi"
+
 module EcwidApi
   # Public: Authentication objects manage OAuth authentication with an Ecwid
   #         store.
   #
   # Examples
   #
-  #   app = EcwidApi::Application.new do |config|
+  #   app = EcwidApi::Authentication.new do |config|
   #     # see initialize for configuration
   #   end
   #
@@ -15,24 +17,25 @@ module EcwidApi
   #   token.access_token
   #   token.store_id      # these are what you need to access the API
   #
-  class Authentication
-    CONFIG = %w(client_id client_secret scope)
+  class OAuth
+    CONFIG = %w(client_id client_secret scope request_uri)
     attr_accessor *CONFIG
 
-    # Public: Initializes a new Ecwid Application for OAuth
+    # Public: Initializes a new Ecwid Authentication for OAuth
     #
     # Examples
     #
-    #   app = EcwidApi::Application.new do |config|
-    #     config.client_id = "some client id"
+    #   app = EcwidApi::Authentication.new do |config|
+    #     config.client_id     = "some client id"
     #     config.client_secret = "some client secret"
     #     config.scope         "this_is_what_i_want_to_do oh_and_that_too"
+    #     config.request_uri   = "https://example.com/oauth"
     #   end
     #
     def initialize
       yield(self) if block_given?
       CONFIG.each do |method|
-        raise Error.new("#{method} is required to initialize a new EcwidApi::Application") unless send(method)
+        raise Error.new("#{method} is required to initialize a new EcwidApi::Authentication") unless send(method)
       end
     end
 
@@ -62,6 +65,7 @@ module EcwidApi
         client_id:     client_id,
         client_secret: client_secret,
         code:          code,
+        request_uri:   request_uri,
         grant_type:    "authorization_code"
       )
 
@@ -81,8 +85,11 @@ module EcwidApi
       {
         client_id:     client_id,
         scope:         scope,
-        response_type: "code"
-      }.to_query
+        response_type: "code",
+        request_uri:   request_uri
+      }.map do |key, val|
+        "#{CGI.escape(key.to_s)}=#{CGI.escape(val.to_s)}"
+      end.join(?&)
     end
 
     # Private: Returns a connection for obtaining an access token from Ecwid

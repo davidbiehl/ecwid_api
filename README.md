@@ -29,6 +29,37 @@ Or install it yourself as:
 
 ## Usage
 
+### Get Authorized with OAuth2
+
+Ecwid API v3 uses OAuth2 to authorize 3rd party apps to use the API with a
+store. The `EcwidApi::OAuth` class helps facilitate this process. Once you
+get setup with a `client_id` and `client_secret` from Ecwid, configure a new
+instance like so:
+
+    @auth = EcwidApi::OAuth.new do |config|
+      config.client_id = "the client id"
+      config.client_secret = "the client secret (shh...)"
+      config.request_uri   = "https://example.com/oauth"
+      config.scope         = "the_permissions_i_want"
+    end
+
+The `#oauth_url` method will provide the URL that the user needs to go to
+to authorize your application with their store. It can be used in Rails like so:
+
+    link_to @auth.oauth_url, "Click here to Authorize this Groovy App!"
+
+When the user authorizes your app, they will be redirected to the `request_uri`
+with a `code` parameter in the query string.
+Just send that code to the `#access_token` method to complete the authorization
+and get your `access_token` and `store_id`.
+
+    # https://example.com/oauth?code=super_secret_temporary_code
+
+    token = @auth.access_token(params[:code])
+
+    token.access_token  # the token for the Client
+    token.store_id      # the store_id for the Client
+
 ### Configure an new Client
 
 A `Client` will interface with a single Ecwid store. The `store_id` and OAuth
@@ -38,7 +69,7 @@ A `Client` will interface with a single Ecwid store. The `store_id` and OAuth
 
     client = EcwidApi::Client.new(store_id, access_token)
 
-## APIs
+## The APIs
 
 ### Entities
 
