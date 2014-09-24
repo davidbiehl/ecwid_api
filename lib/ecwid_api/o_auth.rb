@@ -1,4 +1,5 @@
 require "cgi"
+require "ostruct"
 
 module EcwidApi
   # Public: Authentication objects manage OAuth authentication with an Ecwid
