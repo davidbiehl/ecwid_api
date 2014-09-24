@@ -1,7 +1,11 @@
-require 'faraday'
-
 module Helpers
-  module Faraday
+  module Client
+    def client
+      @client ||= EcwidApi::Client.new(12345, "access_token").tap do |client|
+        allow(client).to receive(:connection).and_return(faraday)
+      end
+    end
+
     def fixtures
       %w(categories category orders)
     end
@@ -20,11 +24,6 @@ module Helpers
         builder.response :json, content_type: /\bjson$/
         builder.adapter :test, faraday_stubs
       end
-    end
-
-    # Public: Uses the Faraday stub connection with the client
-    def faraday_client(client)
-      allow(client).to receive(:connection).and_return(faraday)
     end
   end
 end

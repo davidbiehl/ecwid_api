@@ -1,12 +1,7 @@
 require 'spec_helper'
 
-describe EcwidApi::CategoryApi, faraday: true do
-  let(:client) { EcwidApi::Client.new { |config| config.store_id = '12345' } }
-  subject { EcwidApi::CategoryApi.new(client) }
-
-  before(:each) do
-    faraday_client(client)
-  end
+describe EcwidApi::Api::Categories, faraday: true do
+  subject { client.categories }
 
   describe "#all" do
     it "gets all of the categories from the client" do

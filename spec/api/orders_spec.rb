@@ -1,25 +1,9 @@
 require 'spec_helper'
 
-describe EcwidApi::OrderApi, faraday: true do
-  let(:client) do
-    EcwidApi::Client.new do |config|
-      config.store_id = '12345'
-      config.order_secret_key = '4567'
-    end
-  end
-
-  subject { EcwidApi::OrderApi.new(client) }
-
-  before(:each) do
-    faraday_client(client)
-  end
+describe EcwidApi::Api::Orders, faraday: true do
+  subject { client.orders }
 
   describe "#all" do
-    it "includes the order_secret_key from the client no matter what" do
-      expect(client).to receive(:get).with("orders", hash_including(secure_auth_key: '4567'))
-      subject.all(secure_auth_key: '4')
-    end
-
     it "limits the request to 100 no matter what" do
       expect(client).to receive(:get).with("orders", hash_including(limit: 100))
       subject.all(limit: 10)

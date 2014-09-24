@@ -37,17 +37,17 @@ module EcwidApi
 
     # Public: Returns the Category API
     def categories
-      @categories ||= CategoryApi.new(self)
+      @categories ||= Api::Categories.new(self)
     end
 
     # Public: Returns the Order API
     def orders
-      @orders ||= OrderApi.new(self)
+      @orders ||= Api::Orders.new(self)
     end
 
     # Public: Returns the Products API
     def products
-      @products ||= ProductApi.new(self)
+      @products ||= Api::Products.new(self)
     end
 
     # Private: Returns a Faraday connection to interface with the Ecwid API
