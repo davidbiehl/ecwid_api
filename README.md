@@ -4,6 +4,15 @@ A gem to interface with the Ecwid REST APIs.
 
 [![Code Climate](https://codeclimate.com/github/davidbiehl/ecwid_api.png)](https://codeclimate.com/github/davidbiehl/ecwid_api)
 
+## API v3 Warning!
+
+This is for the latest version of the API, also known as v3, which is currently
+in closed beta! The (incomplete) v1 API is still available on the
+[api-v1 branch](https://github.com/davidbiehl/ecwid_api/tree/api-v1).
+
+To participate in the beta, please contact Ecwid and they can give you the
+information necessary to configure and authorize your application with OAuth2.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -22,24 +31,19 @@ Or install it yourself as:
 
 ### Configure an new Client
 
-A `Client` will interface with a single Ecwid store. The `store_id` will need
-to be configured for each new `Client`.
+A `Client` will interface with a single Ecwid store. The `store_id` and OAuth
+`access_token` will need to be provided to the client.
 
     require 'ecwid_api'
 
-    client = EcwidApi::Client.new do |config|
-      config.store_id           = '12345'                        # your Ecwid Store ID
-      config.url                = 'https://app.ecwid.com/api/v1' # default
-      config.order_secret_key   = 'ORDER_SECRET_KEY'
-      config.product_secret_key = 'PRODUCT_SECRET_KEY'
-    end
+    client = EcwidApi::Client.new(store_id, access_token)
 
 ## APIs
 
 ### Entities
 
 Instead of returning raw JSON from the API, there are Entities that will help
-you work with the data. The [Ecwid API](http://kb.ecwid.com/w/page/25232810/API)
+you work with the data. The [Ecwid API](http://lamp.ecwid.net/~ene/api-docs/)
 will give you all of the fields that are available for every entity. Our
 Entities will give you access to the data with the `[]` method, or a snake_case
 version of the property name. For example, with an `EcwidApi::Category` the
@@ -68,7 +72,7 @@ The Category API will allow you to access the categories for an Ecwid store.
 An instance of the Category API is available on the client.
 
     api = client.categories
-    # => #<EcwidApi::CategoryApi>
+    # => #<EcwidApi::Api::Categories>
 
     api.all
     # Returns an Array of all of the `EcwidApi::Category` objects
@@ -136,7 +140,7 @@ To make a request, simply call the `#get` method on the client passing in the
 relative path and any parameters it requires.
 For example, to get some categories:
 
-    # GET https://app.ecwid.com/api/v1/[STORE-ID]/categories?parent=1
+    # GET https://app.ecwid.com/api/v3/[STORE-ID]/categories?parent=1
 
     client.get("categories", parent: 1)
 
@@ -149,7 +153,7 @@ JSON.
 
 ### Ecwid API Documentation
 
-The [Ecwid API documentation](http://kb.ecwid.com/w/page/25232810/API)
+The [Ecwid API documentation](http://lamp.ecwid.net/~ene/api-docs/)
 should give you a good idea of what is possible to retreive. It also defines
 which properties are available on each of the entities it provies. Please note
 that resources requiring the secret keys will be inaccessible until we implement
