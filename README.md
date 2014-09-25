@@ -10,8 +10,11 @@ This is for the latest version of the API, also known as v3, which is currently
 in closed beta! The (incomplete) v1 API is still available on the
 [api-v1 branch](https://github.com/davidbiehl/ecwid_api/tree/api-v1).
 
-To participate in the beta, please contact Ecwid and they can give you the
+To participate in the beta, please contact Ecwid and they will give you the
 information necessary to configure and authorize your application with OAuth2.
+
+[Ecwid's API Documentation](http://api.ecwid.com) will be an important reference
+in order to understand what their API is capable of.
 
 ## Installation
 
@@ -74,7 +77,7 @@ A `Client` will interface with a single Ecwid store. The `store_id` and OAuth
 ### Entities
 
 Instead of returning raw JSON from the API, there are Entities that will help
-you work with the data. The [Ecwid API](http://lamp.ecwid.net/~ene/api-docs/)
+you work with the data. The [Ecwid API](http://api.ecwid.com)
 will give you all of the fields that are available for every entity. Our
 Entities will give you access to the data with the `[]` method, or a snake_case
 version of the property name. For example, with an `EcwidApi::Category` the
@@ -184,7 +187,7 @@ JSON.
 
 ### Ecwid API Documentation
 
-The [Ecwid API documentation](http://lamp.ecwid.net/~ene/api-docs/)
+The [Ecwid API documentation](http://api.ecwid.com)
 should give you a good idea of what is possible to retreive. It also defines
 which properties are available on each of the entities it provies. Please note
 that resources requiring the secret keys will be inaccessible until we implement
