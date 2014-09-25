@@ -47,6 +47,10 @@ module EcwidApi
       end
     end
 
+    def combinations
+      @combinations ||= Api::ProductCombinations.new(self, client)
+    end
+
     private
 
     def api_uri

@@ -19,6 +19,7 @@ module EcwidApi
   autoload :Order, "ecwid_api/order"
   autoload :OrderItem, "ecwid_api/order_item"
   autoload :Person, "ecwid_api/person"
+  autoload :ProductCombination, "ecwid_api/product_combination"
 
   autoload :Product,    "ecwid_api/product"
 end
