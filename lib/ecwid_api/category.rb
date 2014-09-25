@@ -1,5 +1,7 @@
 module EcwidApi
   class Category < Entity
+    include Api
+
     # Public: Returns an Array of sub categories for the Category
     def sub_categories
       @sub_categories ||= client.categories.all(id)
