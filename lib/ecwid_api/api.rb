@@ -22,7 +22,7 @@ module EcwidApi
     #
     def raise_on_failure(response)
       if response.success?
-        yield if block_given?
+        yield(response) if block_given?
       else
         raise ResponseError.new(response)
       end
