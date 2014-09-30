@@ -10,10 +10,7 @@ module EcwidApi
       #          nil, then all of the categories will be returned
       #
       # Returns an array of EcwidApi::Category objects
-      def all(parent = nil)
-        params = {}
-        params[:parent] = parent if parent
-
+      def all(params = {})
         response = client.get("categories", params)
 
         if response.success?
@@ -24,8 +21,8 @@ module EcwidApi
       end
 
       # Public: Returns an Array of the root level EcwidApi::Category objects
-      def root
-        all(0)
+      def root(params = {})
+        all(params.merge(parent: 0))
       end
 
       # Public: Returns a single EcwidApi::Category
@@ -35,14 +32,25 @@ module EcwidApi
       # category_id - A Category ID to get
       #
       # Returns an EcwidApi::Category, or nil if it can't be found
-      def find(category_id)
-        response = client.get("category", id: category_id)
+      def find(id)
+        response = client.get("categories/#{id}")
 
         if response.success?
           Category.new(response.body, client: client)
         else
           nil
         end
+      end
+
+      # Public: Creates a new Category
+      #
+      # params - a Hash of API keys and their corresponding values
+      #
+      # Returns a new Category entity
+      def create(params)
+        response = client.post("categories", params)
+
+        raise_on_failure(response) { |response| find(response.body["id"]) }
       end
     end
   end

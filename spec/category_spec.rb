@@ -5,7 +5,7 @@ describe EcwidApi::Category, faraday: true do
 
   describe "#sub_categories" do
     it "sends the request to the CategoryApi" do
-      expect(client.categories).to receive(:all).with(123)
+      expect(client.categories).to receive(:all).with(parent: 123)
       subject.sub_categories
     end
 

@@ -15,6 +15,7 @@ module Helpers
         fixtures.each do |fixture|
           stub.get(fixture) { [ 200, {"Content-Type" => "application/json"}, File.read("spec/fixtures/#{fixture}.json") ] }
         end
+        stub.get("/categories/5") { [200, {"Content-Type" => "application/json"}, File.read("spec/fixtures/category.json") ] }
       end
     end
 

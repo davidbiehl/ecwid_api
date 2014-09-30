@@ -11,20 +11,20 @@ describe EcwidApi::Api::Categories, faraday: true do
 
     it "gets sub categories" do
       expect(client).to receive(:get).with("categories", parent: 5).and_call_original
-      subject.all(5)
+      subject.all(parent: 5)
     end
   end
 
   describe "#root" do
     it "gets the root level categories" do
-      expect(subject).to receive(:all).with(0).and_call_original
+      expect(subject).to receive(:all).with(parent: 0).and_call_original
       subject.root
     end
   end
 
   describe "#find" do
     it "finds a single category" do
-      expect(client).to receive(:get).with("category", id: 5).and_call_original
+      expect(client).to receive(:get).with("categories/#{5}").and_call_original
       subject.find(5)
     end
   end
