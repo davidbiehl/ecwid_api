@@ -12,6 +12,7 @@ module EcwidApi
     #
     def initialize(data, opts={})
       @client, @data = opts[:client], data
+      @new_data = {}
     end
 
     # Public: Returns a property of the data (actual property name)

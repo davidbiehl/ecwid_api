@@ -12,5 +12,19 @@ module EcwidApi
       parent_id = data["parentId"]
       client.categories.find(parent_id) if parent_id
     end
+
+    def product_ids=(product_ids)
+      @new_data[:productIds] = product_ids
+    end
+
+    def save
+      unless @new_data.empty?
+        client.put("categories/#{id}", @new_data).tap do |response|
+          raise_on_failure(response)
+          @data.merge!(@new_data)
+          @new_data.clear
+        end
+      end
+    end
   end
 end
