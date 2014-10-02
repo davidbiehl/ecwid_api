@@ -1,3 +1,5 @@
+require "open-uri"
+
 module EcwidApi
   class Category < Entity
     include Api
@@ -15,6 +17,19 @@ module EcwidApi
 
     def product_ids=(product_ids)
       @new_data[:productIds] = product_ids
+    end
+
+    # Public: Uploads an image for the Category
+    #
+    # filename - a String that is the path to a local file or a URL
+    #
+    # Returns a Faraday::Response object
+    def upload_image!(filename)
+      client.post("categories/#{id}/image") do |req|
+        req.body = open(filename).read
+      end.tap do |response|
+        raise_on_failure(response)
+      end
     end
 
     def save
