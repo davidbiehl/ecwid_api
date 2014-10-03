@@ -40,6 +40,8 @@ module EcwidApi
         else
           nil
         end
+      rescue Zlib::BufError
+        nil
       end
 
       # Public: Creates a new Category
