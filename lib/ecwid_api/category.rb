@@ -25,6 +25,14 @@ module EcwidApi
       end
     end
 
+    def parents
+      if parent
+        parent.parents + [parent]
+      else
+        []
+      end
+    end
+
     def product_ids=(product_ids)
       @new_data[:productIds] = product_ids
     end
