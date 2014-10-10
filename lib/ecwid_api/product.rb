@@ -47,6 +47,12 @@ module EcwidApi
       end
     end
 
+    def destroy!
+      client.delete("#{api_uri}").tap do |response|
+        raise_on_failure(response)
+      end
+    end
+
     def combinations
       @combinations ||= Api::ProductCombinations.new(self, client)
     end

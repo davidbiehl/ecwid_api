@@ -60,5 +60,13 @@ module EcwidApi
 
       super method, *args
     end
+
+    def to_hash
+      data
+    end
+
+    def to_json(*args)
+      data.to_json(*args)
+    end
   end
 end

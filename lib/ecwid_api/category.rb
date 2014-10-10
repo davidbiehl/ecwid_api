@@ -9,10 +9,20 @@ module EcwidApi
       @sub_categories ||= client.categories.all(params.merge(parent: id))
     end
 
+    # Public: Returns an Array of all of the sub categories (deep) for the
+    #         Category
+    def all_sub_categories(params = {})
+      @all_sub_categories ||= sub_categories(params) + sub_categories.flat_map do |sub|
+        sub.all_sub_categories(params)
+      end
+    end
+
     # Public: Returns the parent EcwidApi::Category, or nil if there isn't one
     def parent
-      parent_id = data["parentId"]
-      client.categories.find(parent_id) if parent_id
+      @parent ||= begin
+        parent_id = data["parentId"]
+        client.categories.find(parent_id) if parent_id
+      end
     end
 
     def product_ids=(product_ids)
@@ -28,6 +38,12 @@ module EcwidApi
       client.post("categories/#{id}/image") do |req|
         req.body = open(filename).read
       end.tap do |response|
+        raise_on_failure(response)
+      end
+    end
+
+    def destroy!
+      client.delete("categories/#{id}").tap do |response|
         raise_on_failure(response)
       end
     end
