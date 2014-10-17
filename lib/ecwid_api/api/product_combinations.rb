@@ -1,6 +1,8 @@
 module EcwidApi
   module Api
     class ProductCombinations < Base
+      include Api
+
       attr_reader :product
 
       def initialize(product, client)
@@ -13,7 +15,7 @@ module EcwidApi
 
         if response.success?
           response.body.map do |data|
-            ProductCombination.new(data, client: client)
+            ProductCombination.new(data, client: client, product: product)
           end
         end
       end
@@ -22,7 +24,7 @@ module EcwidApi
         response = client.get("products/#{product.id}/combinations/#{id}")
 
         if response.success?
-          ProductCombination.new(response.body, client: client)
+          ProductCombination.new(response.body, product: product, client: client)
         end
       end
 
