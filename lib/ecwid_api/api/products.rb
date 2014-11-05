@@ -5,6 +5,7 @@ module EcwidApi
       #
       # Returns an Array of Product objects
       def all(params = {})
+        params[:limit] ||= 100
         response = client.get("products", params)
 
         PagedEnumerator.new(response) do |response, yielder|
@@ -16,7 +17,7 @@ module EcwidApi
             response.body[i].to_i
           end
 
-          if count + offset >= total
+          if count == 0 || count + offset >= total
             false
           else
             client.get("products", params.merge(offset: offset + count))
