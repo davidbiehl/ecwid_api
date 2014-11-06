@@ -1,7 +1,15 @@
 module EcwidApi
   class ProductCombination < Entity
-    include Api
     attr_reader :product
+
+    self.url_root = -> { "products/#{product.id}/combinations" }
+
+    ecwid_reader :id, :combinationNumber, :options, :sku, :smallThumbnailUrl,
+                 :thumbnailUrl, :imageUrl, :originalImageUrl, :quantity,
+                 :unlimited, :price, :wholesalePrices, :weight, :warningLimit
+
+    ecwid_writer :options, :sku, :quantity, :unlimited, :price,
+                 :wholesalePrices, :weight, :warningLimit, :inventoryDelta
 
     def initialize(data, opts={})
       super(data, opts)
@@ -16,7 +24,7 @@ module EcwidApi
     #
     # Returns a Faraday::Response object
     def upload_image!(filename)
-      client.post("products/#{product.id}/combinations/#{id}/image") do |req|
+      client.post("#{url}/image") do |req|
         req.body = open(filename).read
       end.tap do |response|
         raise_on_failure(response)

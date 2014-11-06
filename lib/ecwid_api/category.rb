@@ -2,7 +2,12 @@ require "open-uri"
 
 module EcwidApi
   class Category < Entity
-    include Api
+    self.url_root = "categories"
+
+    ecwid_reader :id, :parentId, :orderBy, :thumbnailUrl, :originalImageUrl,
+                 :name, :url, :productCount, :description, :enabled, :productIds
+
+    ecwid_writer :name, :parentId, :orderBy, :description, :enabled, :productIds
 
     # Public: Returns an Array of sub categories for the Category
     def sub_categories(params = {})
@@ -33,10 +38,6 @@ module EcwidApi
       end
     end
 
-    def product_ids=(product_ids)
-      @new_data[:productIds] = product_ids
-    end
-
     # Public: Uploads an image for the Category
     #
     # filename - a String that is the path to a local file or a URL
@@ -47,22 +48,6 @@ module EcwidApi
         req.body = open(filename).read
       end.tap do |response|
         raise_on_failure(response)
-      end
-    end
-
-    def destroy!
-      client.delete("categories/#{id}").tap do |response|
-        raise_on_failure(response)
-      end
-    end
-
-    def save
-      unless @new_data.empty?
-        client.put("categories/#{id}", @new_data).tap do |response|
-          raise_on_failure(response)
-          @data.merge!(@new_data)
-          @new_data.clear
-        end
       end
     end
   end

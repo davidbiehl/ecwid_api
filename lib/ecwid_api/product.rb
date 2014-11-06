@@ -2,7 +2,22 @@ require "open-uri"
 
 module EcwidApi
 	class Product < Entity
-    include Api
+    self.url_root = "products"
+
+    ecwid_reader :id, :sku, :quantity, :unlimited, :inStock, :name, :price,
+                 :priceInProductList, :wholesalePrices, :compareToPrice,
+                 :weight, :url, :created, :updated, :productClassId,
+                 :enabled, :options, :warningLimit, :fixedShippingRateOnly,
+                 :fixedShippingRate, :defaultCombinationId, :thumbnailUrl,
+                 :imageUrl, :smallThumbnailUrl, :originalImageUrl, :description,
+                 :galleryImages, :categoryIds, :defaultCategoryId, :favorites,
+                 :attributes, :files, :relatedProducts, :combinations
+
+    ecwid_writer :sku, :name, :quantity, :price, :wholesalePrices,
+                 :compareToPrice, :weight, :productClassId, :enabled, :options,
+                 :warningLimit, :fixedShippingRateOnly, :fixedShippingRate,
+                 :description, :categoryIds, :defaultCategoryId, :attributes,
+                 :relatedProducts
 
     # Public: Uploads a primary image for a Product
     #
@@ -12,7 +27,7 @@ module EcwidApi
     #
     # Returns a Faraday::Response object
     def upload_image!(filename)
-      client.post("#{api_uri}/image") do |req|
+      client.post("#{url}/image") do |req|
         req.body = open(filename).read
       end.tap do |response|
         raise_on_failure(response)
@@ -28,7 +43,7 @@ module EcwidApi
     # Returns an Array of Faraday::Response object
     def upload_gallery_images!(*filenames)
       filenames.map do |filename|
-        client.post("#{api_uri}/gallery") do |req|
+        client.post("#{url}/gallery") do |req|
           req.body = open(filename).read
         end.tap do |response|
           raise_on_failure(response)
@@ -42,25 +57,13 @@ module EcwidApi
     #
     # Returns a Faraday::Response object
     def delete_gallery_images!
-      client.delete("#{api_uri}/gallery").tap do |response|
-        raise_on_failure(response)
-      end
-    end
-
-    def destroy!
-      client.delete("#{api_uri}").tap do |response|
+      client.delete("#{url}/gallery").tap do |response|
         raise_on_failure(response)
       end
     end
 
     def combinations
       @combinations ||= Api::ProductCombinations.new(self, client)
-    end
-
-    private
-
-    def api_uri
-      "products/#{id}"
     end
 	end
 end

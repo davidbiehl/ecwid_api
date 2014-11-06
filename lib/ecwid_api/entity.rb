@@ -1,8 +1,71 @@
 module EcwidApi
   class Entity
+    include Api
+
     # Private: Gets the Hash of data
     attr_reader :data
-    private     :data
+    protected   :data
+
+    class << self
+      attr_accessor :url_root
+
+      # Public: Creates a snake_case access method from an Ecwid property name
+      #
+      # Example
+      #
+      #   class Product < Entity
+      #     ecwid_reader :id, :inStock
+      #   end
+      #
+      #   product = client.products.find(12)
+      #   product.in_stock
+      #
+      def ecwid_reader(*attrs)
+        attrs.map(&:to_s).each do |attribute|
+          method = attribute.underscore
+          define_method(method) do
+            self[attribute]
+          end unless method_defined?(attribute.underscore)
+        end
+      end
+
+      # Public: Creates a snake_case writer method from an Ecwid property name
+      #
+      # Example
+      #
+      #   class Product < Entity
+      #     ecwid_writer :inStock
+      #   end
+      #
+      #   product = client.products.find(12)
+      #   product.in_stock = true
+      #
+      def ecwid_writer(*attrs)
+        attrs.map(&:to_s).each do |attribute|
+          method = "#{attribute.underscore}="
+          define_method(method) do |value|
+            @new_data[attribute] = value
+          end unless method_defined?(method)
+        end
+      end
+
+      # Public: Creates a snake_case accessor method from an Ecwid property name
+      #
+      # Example
+      #
+      #   class Product < Entity
+      #     ecwid_accessor :inStock
+      #   end
+      #
+      #   product = client.products.find(12)
+      #   product.in_stock
+      #   product.in_stock = true
+      #
+      def ecwid_accessor(*attrs)
+        ecwid_reader(*attrs)
+        ecwid_writer(*attrs)
+      end
+    end
 
     # Public: Initialize a new entity with a reference to the client and data
     #
@@ -28,37 +91,44 @@ module EcwidApi
     #
     # Returns the value of the property, or nil if it doesn't exist
     def [](key)
-      data[key.to_s]
+      @new_data[key.to_s] || data[key.to_s]
     end
 
-    # Public: Get a property of the data (snake_case)
+    # Public: The URL of the entity
     #
-    # This is used as a helper to allow easy access to the data. It will work
-    # with both CamelCased and snake_case keys. For example, if the data
-    # contains a "parentId" key, then calling `entity.parent_id` should work.
-    #
-    # This will NOT return null of the property doesn't exist on the data!
-    #
-    # Examples
-    #
-    #   entity.parent_id    # same as `entity["parentId"]`
-    #
-    # TODO: #method_missing isn't the ideal solution because Ecwid will only
-    # return a property if it doesn't have a null value. An example of this are
-    # the top level categories. They don't have a parentId, so that property
-    # is ommitted from the API response. Calling `category.parent_id` will
-    # result in an "undefined method `parent_id'". However, calling `#parent_id`
-    # on any other category will work.
-    #
-    # Returns the value of the property
-    def method_missing(method, *args)
-      method_string = method.to_s
+    # Returns a String that is the URL of the entity
+    def url
+      url_root = self.class.url_root
+      raise Error.new("Please specify a url_root for the #{self.class.to_s}") unless url_root
 
-      [ method_string, method_string.camel_case ].each do |key|
-        return data[key] if data.has_key?(key)
+      if url_root.respond_to?(:call)
+        url_root = instance_exec(&url_root)
       end
 
-      super method, *args
+      url_root + "/#{id}"
+    end
+
+    # Public: Saves the Entity
+    #
+    # Saves anything stored in the @new_data hash
+    #
+    # path - the URL of the entity
+    #
+    def save
+      unless @new_data.empty?
+        client.put(url, @new_data).tap do |response|
+          raise_on_failure(response)
+          @data.merge!(@new_data)
+          @new_data.clear
+        end
+      end
+    end
+
+    # Public: Destroys the Entity
+    def destroy!
+      client.delete(url).tap do |response|
+        raise_on_failure(response)
+      end
     end
 
     def to_hash
