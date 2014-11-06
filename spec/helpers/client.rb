@@ -7,7 +7,7 @@ module Helpers
     end
 
     def fixtures
-      %w(categories category orders)
+      %w(categories category orders products)
     end
 
     def faraday_stubs

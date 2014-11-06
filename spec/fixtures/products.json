@@ -1,0 +1,141 @@
+{
+    "total": 5,
+    "count": 5,
+    "offset": 0,
+    "limit": 10,
+    "items": [
+        {
+            "id": 41316136,
+            "sku": "NC53090",
+            "smallThumbnailUrl": "http://images-cdn.ecwid.com/images/4881025/242429875.jpg",
+            "thumbnailUrl": "http://images-cdn.ecwid.com/images/4881025/242429874.jpg",
+            "imageUrl": "http://images-cdn.ecwid.com/images/4881025/245156912.jpg",
+            "originalImageUrl": "http://images-cdn.ecwid.com/images/4881025/245156911.jpg",
+            "unlimited": true,
+            "inStock": true,
+            "name": "<em>Book:</em> Therapeutic Hand Splints: A Rational Approach",
+            "price": 80.95,
+            "weight": 0.063,
+            "url": "http://preview.myncmstore.com#!/em-Book-em-Therapeutic-Hand-Splints-A-Rational-Approach/p/41316136",
+            "created": "2014-09-13 01:45:38 -0700",
+            "updated": "2014-10-15 09:01:31 -0700",
+            "productClassId": 0,
+            "enabled": false,
+            "description": "<p><em>Mechanical and biomechanical considerations of hand splinting. </em><br /> This book takes an in-depth look into the design, manufacture and application of splints for the upper limb and specifically the hand. The first section, <em>Mechanical Considerations</em>, includes immobilization and mobilization splinting, technical considerations, splinting materials and components. The second section, <em>Biomechanical Considerations</em>, addresses anatomical shape and positioning, volume control and pressure, and biokinematic and biokinetic systems. Includes numerous photographs and illustrations. Soft cover, 214 pages. Written by Paul Van Lede, MS, OT and Griet van Veldhoven, OT. Copyright 1998.</p>",
+            "descriptionTruncated": false,
+            "priceInProductList": 80.95,
+            "categoryIds": [],
+            "defaultCategoryId": 0,
+            "favorites": {
+                "count": 0,
+                "displayedCount": "0"
+            }
+        },
+        {
+            "id": 41316720,
+            "sku": "T631",
+            "smallThumbnailUrl": "http://images-cdn.ecwid.com/images/4881025/242433086.jpg",
+            "thumbnailUrl": "http://images-cdn.ecwid.com/images/4881025/242433085.jpg",
+            "imageUrl": "http://images-cdn.ecwid.com/images/4881025/245154405.jpg",
+            "originalImageUrl": "http://images-cdn.ecwid.com/images/4881025/245154403.jpg",
+            "unlimited": true,
+            "inStock": true,
+            "name": "SportsArt T631",
+            "price": 4315,
+            "weight": 595,
+            "url": "http://preview.myncmstore.com#!/SportsArt-T631/p/41316720",
+            "created": "2014-09-13 01:46:13 -0700",
+            "updated": "2014-10-15 08:58:41 -0700",
+            "productClassId": 0,
+            "enabled": false,
+            "description": "<p><em>4.0 hp ECO-POWR™ motor uses up to 32% less energy without compromising power. </em></p> <p><strong>Motor</strong> - 4 hp DC</p> <p><strong>Speed range</strong> - .1 to 12 mph (.16 to 19km/h)</p> <p><strong>Incline range</strong> - 0 to 15%</p> <p><strong>Deck Cushioning</strong> - 4-way reversible phenolic, My-Flex™</p> <p><strong>Display/Feedback</strong> - Dot Matrix and LEDs</p> <p><strong>Programs</strong> - 3 Interval (1:1, 1:2, 2:2), Random (x10,000), 2 Glute (30 min, and 45  min), 3 Hill, HRC Cardio, HRC Weight Loss, Quick Star, Manual/Track,  Zone Trainer™, Fitness Tests (Bruce, Gerkin, WFI, Army, Marines)</p> <p><strong>Medical rails</strong> - Optional</p> <p><strong>Maximum user weight </strong>- 450 lbs. (181kg)</p> <p><strong>Unit dimensions</strong> - 83.5\" x 38.6\" x 56.3\" (212 x 98 x 143)</p> <p><strong>Unit weight </strong>- 297 lbs. (135kg)</p> <p><strong>Warranty</strong> - Lifetime frame, 5 years parts, Dedicated Power Supply</p> <p><strong>Power requirements</strong> - 120 VAC, 60 Hz, 12A, 1440W; Plug UL NEMA 5-15; Cord 14 AWG CSA-approved; Fuse 12A (6x30 mm), 100-120V, Fast blow</p> <p><strong>Shipping</strong> - Call for freight quote</p>",
+            "descriptionTruncated": false,
+            "priceInProductList": 4315,
+            "categoryIds": [],
+            "defaultCategoryId": 0,
+            "favorites": {
+                "count": 0,
+                "displayedCount": "0"
+            }
+        },
+        {
+            "id": 41316721,
+            "sku": "T611",
+            "smallThumbnailUrl": "http://images-cdn.ecwid.com/images/4881025/242433090.jpg",
+            "thumbnailUrl": "http://images-cdn.ecwid.com/images/4881025/242433089.jpg",
+            "imageUrl": "http://images-cdn.ecwid.com/images/4881025/245154466.jpg",
+            "originalImageUrl": "http://images-cdn.ecwid.com/images/4881025/245154465.jpg",
+            "unlimited": true,
+            "inStock": true,
+            "name": "SportsArt T611",
+            "price": 2595,
+            "weight": 0,
+            "url": "http://preview.myncmstore.com#!/SportsArt-T611/p/41316721",
+            "created": "2014-09-13 01:46:13 -0700",
+            "updated": "2014-10-15 08:58:41 -0700",
+            "productClassId": 0,
+            "enabled": false,
+            "description": "<p><em>Powerful 3.0 hp DC motor with a large 20\" x 58\" running surface. </em></p> <p><strong>Motor</strong>: 3 hp DC</p> <p><strong>Speed range</strong>: .1 to 12 mph (.16 to 19km/h)</p> <p><strong>Incline range</strong>: -3 to 15%</p> <p><strong>Deck Cushioning</strong>: 4-way reversible phenolic, My-Flex™</p> <p><strong>Display/Feedback</strong>: Tri-Color Dot Matrix and LEDs</p> <p><strong>Programs</strong>: Programmable Interval, Random (x10,000), 2 Glute (30 min, and 45   min), 3 Hill, HRC Cardio, HRC Weight Loss, Quick Star, Manual/Track,   Zone Trainer™</p> <p><strong>Medical rails</strong>: Optional</p> <p><strong>Maximum user weight:</strong> 400 lbs. (181kg)</p> <p><strong>Unit dimensions</strong>: 77.5\" x 38\" x 53\" (197 x 97 x 35cm)</p> <p><strong>Unit weight:</strong> 229 lbs. (104kg)</p> <p><strong>Warranty</strong>: Lifetime frame, 5 years parts, Dedicated Power Supply</p> <p><strong>Power requirements</strong>: 120 VAC, 60 Hz, 12A, 1440W; Plug UL NEMA 5-15; Cord 14 AWG CSA-approved; Fuse 12A (6x30 mm), 100-120V, Fast blow</p> <p><strong>Shipping</strong>: Call for freight quote</p>",
+            "descriptionTruncated": false,
+            "priceInProductList": 2595,
+            "categoryIds": [],
+            "defaultCategoryId": 0,
+            "favorites": {
+                "count": 0,
+                "displayedCount": "0"
+            }
+        },
+        {
+            "id": 41316486,
+            "sku": "NC89048",
+            "smallThumbnailUrl": "http://images-cdn.ecwid.com/images/4881025/242432163.jpg",
+            "thumbnailUrl": "http://images-cdn.ecwid.com/images/4881025/242432162.jpg",
+            "imageUrl": "http://images-cdn.ecwid.com/images/4881025/245153078.jpg",
+            "originalImageUrl": "http://images-cdn.ecwid.com/images/4881025/245153077.jpg",
+            "unlimited": true,
+            "inStock": true,
+            "name": "DVD: Clinical Kinesio Taping",
+            "price": 41.95,
+            "weight": 0.192,
+            "url": "http://preview.myncmstore.com#!/DVD-Clinical-Kinesio-Taping/p/41316486",
+            "created": "2014-09-13 01:45:57 -0700",
+            "updated": "2014-10-15 08:56:50 -0700",
+            "productClassId": 0,
+            "enabled": false,
+            "description": "<p><em>Introduction, explanation and application of the Kinesio Taping Method.<br /></em><br />Certified Kinesio Taping Intstructor Jim Wallis, MS, ATC demonstrates step-by-step application of Kinesio Taping Techniques.  Copyright 2000.</p>",
+            "descriptionTruncated": false,
+            "priceInProductList": 41.95,
+            "categoryIds": [],
+            "defaultCategoryId": 0,
+            "favorites": {
+                "count": 0,
+                "displayedCount": "0"
+            }
+        },
+        {
+            "id": 43428452,
+            "sku": "META-2961",
+            "unlimited": true,
+            "inStock": true,
+            "name": "English Pantyhose Aid",
+            "price": 0,
+            "weight": 0,
+            "url": "http://preview.myncmstore.com#!/English-Pantyhose-Aid/p/43428452",
+            "created": "2014-10-21 14:44:31 -0700",
+            "updated": "2014-10-21 14:44:31 -0700",
+            "productClassId": 0,
+            "enabled": true,
+            "description": "<p>test</p>",
+            "descriptionTruncated": false,
+            "priceInProductList": 0,
+            "categoryIds": [
+                11056311
+            ],
+            "defaultCategoryId": 11056311,
+            "favorites": {
+                "count": 0,
+                "displayedCount": "0"
+            }
+        }
+    ]
+}

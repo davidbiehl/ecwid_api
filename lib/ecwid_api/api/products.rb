@@ -1,3 +1,5 @@
+require_relative "../paged_ecwid_response"
+
 module EcwidApi
   module Api
     class Products < Base
@@ -5,23 +7,8 @@ module EcwidApi
       #
       # Returns an Array of Product objects
       def all(params = {})
-        params[:limit] ||= 100
-        response = client.get("products", params)
-
-        PagedEnumerator.new(response) do |response, yielder|
-          response.body["items"].each do |item|
-            yielder << Product.new(item, client: client)
-          end
-
-          count, offset, total = %w(count offset total).map do |i|
-            response.body[i].to_i
-          end
-
-          if count == 0 || count + offset >= total
-            false
-          else
-            client.get("products", params.merge(offset: offset + count))
-          end
+        PagedEcwidResponse.new(client, "products", params) do |product_hash|
+          Product.new(product_hash, client: client)
         end
       end
 
