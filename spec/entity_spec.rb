@@ -3,9 +3,13 @@ require 'spec_helper'
 class EntitySubject < EcwidApi::Entity
   self.url_root = "stuff"
 
-  ecwid_reader :id, :parentId, :type, :modify
+  ecwid_reader :id, :parentId, :type, :modify, :override
   ecwid_writer :writeOnly
   ecwid_accessor :theStatus
+
+  def override
+    super.upcase
+  end
 end
 
 class EntityUrlSubject < EcwidApi::Entity
@@ -22,7 +26,8 @@ describe EcwidApi::Entity do
       "type" => "AWESOME",
       "theStatus" => "YOUNG",
       "hidden" => "tee hee",
-      "writeOnly" => "write me!"
+      "writeOnly" => "write me!",
+      "override" => "upcase me"
     }
   end
 
@@ -54,6 +59,10 @@ describe EcwidApi::Entity do
     it "gets attributes not revealed by ecwid_reader or ecwid_accessor" do
       subject["hidden"].should == "tee hee"
     end
+  end
+
+  describe "overrides" do
+    its(:override) { should == "UPCASE ME" }
   end
 
   describe "accessors" do

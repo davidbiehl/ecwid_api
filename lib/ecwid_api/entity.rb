@@ -9,6 +9,21 @@ module EcwidApi
     class << self
       attr_accessor :url_root
 
+      def define_accessor(attribute, &block)
+        if const_defined?(:Accessors, false)
+          mod = const_get(:Accessors)
+        else
+          mod = const_set(:Accessors, Module.new)
+          include mod
+        end
+
+        mod.module_eval do
+          define_method(attribute, &block)
+        end
+      end
+
+      private :define_accessor
+
       # Public: Creates a snake_case access method from an Ecwid property name
       #
       # Example
@@ -23,7 +38,7 @@ module EcwidApi
       def ecwid_reader(*attrs)
         attrs.map(&:to_s).each do |attribute|
           method = attribute.underscore
-          define_method(method) do
+          define_accessor(method) do
             self[attribute]
           end unless method_defined?(attribute.underscore)
         end
@@ -43,7 +58,7 @@ module EcwidApi
       def ecwid_writer(*attrs)
         attrs.map(&:to_s).each do |attribute|
           method = "#{attribute.underscore}="
-          define_method(method) do |value|
+          define_accessor(method) do |value|
             @new_data[attribute] = value
           end unless method_defined?(method)
         end
