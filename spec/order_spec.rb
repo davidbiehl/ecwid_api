@@ -1,16 +1,17 @@
 require 'spec_helper'
 
-describe EcwidApi::Order do
+describe EcwidApi::Order, faraday: true do
   subject do
     EcwidApi::Order.new({
-      "number" => 123,
+      "orderNumber" => 123,
       "billingPerson" => {
         "name" => "John Doe"
       },
       "shippingPerson" => shipping_person,
       "items" => [{
         "sku" => "112233"
-      }]
+      }],
+      "fulfillmentStatus" => "AWAITING_PROCESSING"
     })
   end
 
@@ -59,6 +60,12 @@ describe EcwidApi::Order do
 
     it "doesn't raise an error with a valid status" do
       expect { subject.fulfillment_status = :processing }.to_not raise_error
+    end
+  end
+
+  describe "#fulfillment_status" do
+    it "is symbolized" do
+      subject.fulfillment_status.should == :awaiting_processing
     end
   end
 end

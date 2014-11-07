@@ -1,3 +1,5 @@
+require_relative "../paged_ecwid_response"
+
 module EcwidApi
   module Api
     # Public: This is the Ecwid API for Orders. It abstracts the end-points
@@ -13,19 +15,8 @@ module EcwidApi
       #
       # Returns a PagedEnumerator of `EcwidApi::Order` objects
       def all(params = {})
-        params[:limit]           = 100
-        params.delete(:offset)
-
-        response = client.get("orders", params)
-
-        PagedEnumerator.new(response) do |response, yielder|
-          response.body["orders"].each do |data|
-            order = Order.new(data, client: client)
-            yielder << order
-          end
-
-          next_url = response.body["nextUrl"]
-          next_url ? client.get(next_url) : false
+        PagedEcwidResponse.new(client, "orders", params) do |order_hash|
+          Order.new(order_hash, client: client)
         end
       end
 
