@@ -19,8 +19,12 @@ describe EcwidApi::Api::Orders, faraday: true do
   end
 
   describe "#find" do
-    it "returns an `EcwidApi::Order` object" do
+    it "is an `EcwidApi::Order`" do
       subject.find(35).is_a?(EcwidApi::Order).should be_true
+    end
+
+    it "is nil when not found" do
+      subject.find(404).should be_nil
     end
   end
 end
