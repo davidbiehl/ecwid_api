@@ -2,6 +2,7 @@ module EcwidApi
   module Api
     class ProductCombinations < Base
       include Api
+      include Enumerable
 
       attr_reader :product
 
@@ -18,6 +19,12 @@ module EcwidApi
             ProductCombination.new(data, client: client, product: product)
           end
         end
+      end
+
+      def each(&block)
+        all = self.all || []
+
+        all.each(&block)
       end
 
       def find(id)
