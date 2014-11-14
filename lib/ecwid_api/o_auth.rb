@@ -19,7 +19,7 @@ module EcwidApi
   #   token.store_id      # these are what you need to access the API
   #
   class OAuth
-    CONFIG = %w(client_id client_secret scope request_uri)
+    CONFIG = %w(client_id client_secret scope redirect_uri)
     attr_accessor *CONFIG
 
     # Public: Initializes a new Ecwid Authentication for OAuth
@@ -30,7 +30,7 @@ module EcwidApi
     #     config.client_id     = "some client id"
     #     config.client_secret = "some client secret"
     #     config.scope         "this_is_what_i_want_to_do oh_and_that_too"
-    #     config.request_uri   = "https://example.com/oauth"
+    #     config.redirect_uri  = "https://example.com/oauth"
     #   end
     #
     def initialize
@@ -66,7 +66,7 @@ module EcwidApi
         client_id:     client_id,
         client_secret: client_secret,
         code:          code,
-        request_uri:   request_uri,
+        redirect_uri:  redirect_uri,
         grant_type:    "authorization_code"
       )
 
@@ -87,7 +87,7 @@ module EcwidApi
         client_id:     client_id,
         scope:         scope,
         response_type: "code",
-        request_uri:   request_uri
+        redirect_uri:  redirect_uri
       }.map do |key, val|
         "#{CGI.escape(key.to_s)}=#{CGI.escape(val.to_s)}"
       end.join(?&)

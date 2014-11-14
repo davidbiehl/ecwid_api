@@ -6,11 +6,11 @@ describe EcwidApi::OAuth do
       config.client_id = "client_id"
       config.client_secret = "client_secret"
       config.scope = "scope"
-      config.request_uri = "https://example.com/oauth"
+      config.redirect_uri = "https://example.com/oauth"
     end
   end
 
-  its(:oauth_url) { should == "https://my.ecwid.com/api/oauth/authorize?client_id=client_id&scope=scope&response_type=code&request_uri=https%3A%2F%2Fexample.com%2Foauth" }
+  its(:oauth_url) { should == "https://my.ecwid.com/api/oauth/authorize?client_id=client_id&scope=scope&response_type=code&redirect_uri=https%3A%2F%2Fexample.com%2Foauth" }
 
   describe "#access_token(code)" do
     let(:response) do
