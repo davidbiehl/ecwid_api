@@ -43,11 +43,18 @@ module EcwidApi
 
     # Public: Returns the billing person
     def billing_person
-      @billing_person ||= Person.new(data["billingPerson"])
+      return unless data["billingPerson"] || data["shippingPerson"]
+
+      @billing_person ||= if data["billingPerson"]
+        Person.new(data["billingPerson"])
+      else
+        shipping_person
+      end
     end
 
     # Public: Returns the shipping person
     def shipping_person
+      return unless data["shippingPerson"] || data["billingPerson"]
       @shipping_person ||= if data["shippingPerson"]
         Person.new(data["shippingPerson"])
       else
