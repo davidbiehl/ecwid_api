@@ -17,7 +17,7 @@ module EcwidApi
           response.body
         else
           []
-        end.map {|category| Category.new(category, client: client) }
+        end.map {|category| Category.new(category, client: client) }.sort_by(&:order_by)
       end
 
       # Public: Returns an Array of the root level EcwidApi::Category objects
