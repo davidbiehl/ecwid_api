@@ -65,5 +65,13 @@ module EcwidApi
     def combinations
       @combinations ||= Api::ProductCombinations.new(self, client)
     end
+
+    def created
+      @created ||= Time.parse(super)
+    end
+
+    def updated
+      @updated ||= Time.parse(super)
+    end
 	end
 end
