@@ -123,6 +123,28 @@ module EcwidApi
       url_root + "/#{id}"
     end
 
+    def assign_attributes(attributes)
+      attributes.each do |key, val|
+        send("#{key}=", val)
+      end
+    end
+
+    def assign_raw_attributes(attributes)
+      attributes.each do |key, val|
+        @new_data[key.to_s] = val
+      end
+    end
+
+    def update_attributes(attributes)
+      assign_attributes(attributes)
+      save
+    end
+
+    def update_raw_attributes(attributes)
+      assign_raw_attributes(attributes)
+      save
+    end
+
     # Public: Saves the Entity
     #
     # Saves anything stored in the @new_data hash
