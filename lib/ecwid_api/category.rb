@@ -38,6 +38,21 @@ module EcwidApi
       end
     end
 
+    # Public: Returns the Products that belong to the Category
+    #
+    # params - a Hash of values that can be used for a Prdocut search
+    #
+    # Returns an Enumeration of Products
+    def products(params = {})
+      @products ||= product_ids.map do |product_id|
+        client.products.find(product_id)
+      end
+    end
+
+    def product_ids
+      super || []
+    end
+
     # Public: Uploads an image for the Category
     #
     # filename - a String that is the path to a local file or a URL
