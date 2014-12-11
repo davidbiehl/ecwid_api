@@ -1,3 +1,5 @@
+require_relative "../paged_ecwid_response"
+
 module EcwidApi
   module Api
     class Categories < Base
@@ -11,13 +13,9 @@ module EcwidApi
       #
       # Returns an array of EcwidApi::Category objects
       def all(params = {})
-        response = client.get("categories", params)
-
-        if response.success?
-          response.body
-        else
-          []
-        end.map {|category| Category.new(category, client: client) }.sort_by(&:order_by)
+        PagedEcwidResponse.new(client, "categories", params) do |category_hash|
+          Category.new(category_hash, client: client)
+        end.sort_by(&:order_by)
       end
 
       # Public: Returns an Array of the root level EcwidApi::Category objects
