@@ -18,6 +18,8 @@ module EcwidApi
     attr_reader :token
     attr_reader :adapter
 
+    attr_reader :connection, :categories, :orders, :products
+
     # Public: Initializes a new Client to interact with the API
     #
     # store_id - the Ecwid store_id to interact with
@@ -26,33 +28,8 @@ module EcwidApi
     #
     def initialize(store_id, token, adapter = Faraday.default_adapter)
       @store_id, @token, @adapter = store_id, token, adapter
-    end
 
-    # Public: The URL of the API for the Ecwid Store
-    def store_url
-      "#{DEFAULT_URL}/#{store_id}"
-    end
-
-    def_delegators :connection, :get, :post, :put, :delete
-
-    # Public: Returns the Category API
-    def categories
-      @categories ||= Api::Categories.new(self)
-    end
-
-    # Public: Returns the Order API
-    def orders
-      @orders ||= Api::Orders.new(self)
-    end
-
-    # Public: Returns the Products API
-    def products
-      @products ||= Api::Products.new(self)
-    end
-
-    # Private: Returns a Faraday connection to interface with the Ecwid API
-    def connection
-      @connection ||= Faraday.new store_url do |conn|
+      @connection = Faraday.new store_url do |conn|
         conn.request  :oauth2, token, param_name: :token
         conn.request  :json
 
@@ -61,6 +38,17 @@ module EcwidApi
 
         conn.adapter  adapter
       end
+
+      @categories = Api::Categories.new(self)
+      @orders     = Api::Orders.new(self)
+      @products   = Api::Products.new(self)
     end
+
+    # Public: The URL of the API for the Ecwid Store
+    def store_url
+      "#{DEFAULT_URL}/#{store_id}"
+    end
+
+    def_delegators :connection, :get, :post, :put, :delete
   end
 end
