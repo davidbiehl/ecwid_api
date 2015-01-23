@@ -9,17 +9,17 @@ require_relative "ecwid_api/error"
 # the default client.
 #
 module EcwidApi
-  autoload :OAuth, "ecwid_api/o_auth"
-  autoload :Client, "ecwid_api/client"
-  autoload :ResponseError, "ecwid_api/error"
-  autoload :Entity, "ecwid_api/entity"
-  autoload :Api, "ecwid_api/api"
+  require_relative "ecwid_api/o_auth"
+  require_relative "ecwid_api/client"
+  require_relative "ecwid_api/error"
+  require_relative "ecwid_api/api"
+  require_relative "ecwid_api/entity"
 
-  autoload :Category, "ecwid_api/category"
-  autoload :Order, "ecwid_api/order"
-  autoload :OrderItem, "ecwid_api/order_item"
-  autoload :Person, "ecwid_api/person"
-  autoload :ProductCombination, "ecwid_api/product_combination"
+  require_relative "ecwid_api/category"
+  require_relative "ecwid_api/order"
+  require_relative "ecwid_api/order_item"
+  require_relative "ecwid_api/person"
+  require_relative "ecwid_api/product_combination"
 
-  autoload :Product,    "ecwid_api/product"
+  require_relative "ecwid_api/product"
 end

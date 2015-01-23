@@ -1,11 +1,11 @@
 module EcwidApi
   # Internal: A base class for common API functionality
   module Api
-    autoload :Base,                "ecwid_api/api/base"
-    autoload :Orders,              "ecwid_api/api/orders"
-    autoload :Products,            "ecwid_api/api/products"
-    autoload :Categories,          "ecwid_api/api/categories"
-    autoload :ProductCombinations, "ecwid_api/api/product_combinations"
+    require_relative "api/base"
+    require_relative "api/orders"
+    require_relative "api/products"
+    require_relative "api/categories"
+    require_relative "api/product_combinations"
 
     # Private: Gets the Client
     attr_reader :client
