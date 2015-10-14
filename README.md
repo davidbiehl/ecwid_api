@@ -43,7 +43,7 @@ instance like so:
     @auth = EcwidApi::OAuth.new do |config|
       config.client_id = "the client id"
       config.client_secret = "the client secret (shh...)"
-      config.request_uri   = "https://example.com/oauth"
+      config.redirect_uri   = "https://example.com/oauth"
       config.scope         = "the_permissions_i_want"
     end
 
@@ -52,7 +52,7 @@ to authorize your application with their store. It can be used in Rails like so:
 
     link_to @auth.oauth_url, "Click here to Authorize this Groovy App!"
 
-When the user authorizes your app, they will be redirected to the `request_uri`
+When the user authorizes your app, they will be redirected to the `redirect_uri`
 with a `code` parameter in the query string.
 Just send that code to the `#access_token` method to complete the authorization
 and get your `access_token` and `store_id`.
