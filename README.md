@@ -140,9 +140,9 @@ Ecwid store. An instance of the Order API is available to the client
     api.all
     # Returns a `PagedEnumerator` containing all of the orders for the store
 
-    api.all({date: "1982-05-17"})
+    api.all({createdFrom: "1982-05-17"})
     # Paremters can be passed as a Hash.
-    # See http://kb.ecwid.com/w/page/43697230/Order%20API#Parameters for
+    # See http://api.ecwid.com/#search-orders
     # a list of available parameters
 
     api.find(123)
