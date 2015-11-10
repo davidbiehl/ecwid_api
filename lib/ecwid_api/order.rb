@@ -42,24 +42,20 @@ module EcwidApi
     end
 
     # Public: Returns the billing person
+    #
+    # If there isn't a billing_person, then it assumed to be the shipping_person
+    #
     def billing_person
-      return unless data["billingPerson"] || data["shippingPerson"]
-
-      @billing_person ||= if data["billingPerson"]
-        Person.new(data["billingPerson"])
-      else
-        shipping_person
-      end
+      build_billing_person || build_shipping_person
     end
 
     # Public: Returns the shipping person
+    #
+    # If there isn't a shipping_person, then it is assumed to be the 
+    # billing_person
+    #
     def shipping_person
-      return unless data["shippingPerson"] || data["billingPerson"]
-      @shipping_person ||= if data["shippingPerson"]
-        Person.new(data["shippingPerson"])
-      else
-        billing_person
-      end
+      build_shipping_person || build_billing_person
     end
 
     # Public: Returns a Array of `OrderItem` objects
@@ -77,6 +73,16 @@ module EcwidApi
 
     def fulfillment_status
       super && super.downcase.to_sym
+    end
+
+    private
+
+    def build_billing_person
+      @billing_person ||= data["billingPerson"] && Person.new(data["billingPerson"])
+    end
+
+    def build_shipping_person
+      @shipping_person ||= data["shippingPerson"] && Person.new(data["shippingPerson"])
     end
   end
 end
