@@ -2,7 +2,8 @@ module EcwidApi
   module Api
     # Internal: A base class for common API functionality
     class Base
-      include Api
+      attr_reader :client
+      private     :client
 
       # Public: Initializes a new EcwidApi::CategoryApi
       #

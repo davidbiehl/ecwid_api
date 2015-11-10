@@ -1,10 +1,11 @@
 module EcwidApi
   class Entity
-    include Api
-
     # Private: Gets the Hash of data
     attr_reader :data
     protected   :data
+
+    attr_reader :client
+    private     :client
 
     class << self
       attr_accessor :url_root
@@ -154,7 +155,6 @@ module EcwidApi
     def save
       unless @new_data.empty?
         client.put(url, @new_data).tap do |response|
-          raise_on_failure(response)
           @data.merge!(@new_data)
           @new_data.clear
         end
@@ -163,9 +163,7 @@ module EcwidApi
 
     # Public: Destroys the Entity
     def destroy!
-      client.delete(url).tap do |response|
-        raise_on_failure(response)
-      end
+      client.delete(url)
     end
 
     def to_hash

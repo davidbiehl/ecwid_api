@@ -42,8 +42,7 @@ module EcwidApi
       # Returns a Product object
       def create(params)
         response = client.post("products", params)
-
-        raise_on_failure(response) {|response| find(response.body["id"]) }
+        find(response.body["id"])
       end
 
       # Public: Updates an existing Product
@@ -55,9 +54,8 @@ module EcwidApi
       #
       # Returns a Product object
       def update(id, params)
-        response = client.put("products/#{id}", params)
-
-        raise_on_failure(response) { find(id) }
+        client.put("products/#{id}", params)
+        find(id)
       end
     end
   end

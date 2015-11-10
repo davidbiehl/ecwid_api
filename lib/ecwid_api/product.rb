@@ -1,5 +1,3 @@
-require "open-uri"
-
 module EcwidApi
 	class Product < Entity
     self.url_root = "products"
@@ -27,11 +25,7 @@ module EcwidApi
     #
     # Returns a Faraday::Response object
     def upload_image!(filename)
-      client.post("#{url}/image") do |req|
-        req.body = open(filename).read
-      end.tap do |response|
-        raise_on_failure(response)
-      end
+      client.post_image("#{url}/image", filename)
     end
 
     # Public: Uploads gallery images for a Product
@@ -43,11 +37,7 @@ module EcwidApi
     # Returns an Array of Faraday::Response object
     def upload_gallery_images!(*filenames)
       filenames.map do |filename|
-        client.post("#{url}/gallery") do |req|
-          req.body = open(filename).read
-        end.tap do |response|
-          raise_on_failure(response)
-        end
+        client.post_image("#{url}/gallery", filename)
       end
     end
 
@@ -57,9 +47,7 @@ module EcwidApi
     #
     # Returns a Faraday::Response object
     def delete_gallery_images!
-      client.delete("#{url}/gallery").tap do |response|
-        raise_on_failure(response)
-      end
+      client.delete("#{url}/gallery")
     end
 
     def combinations

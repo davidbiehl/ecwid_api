@@ -1,5 +1,3 @@
-require "open-uri"
-
 module EcwidApi
   class Category < Entity
     self.url_root = "categories"
@@ -59,11 +57,7 @@ module EcwidApi
     #
     # Returns a Faraday::Response object
     def upload_image!(filename)
-      client.post("categories/#{id}/image") do |req|
-        req.body = open(filename).read
-      end.tap do |response|
-        raise_on_failure(response)
-      end
+      client.post_image("categories/#{id}/image", filename)
     end
   end
 end

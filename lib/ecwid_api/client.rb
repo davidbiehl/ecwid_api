@@ -1,3 +1,5 @@
+require "open-uri"
+
 module EcwidApi
   # Public: Client objects manage the connection and interface to a single Ecwid
   # store.
@@ -49,6 +51,50 @@ module EcwidApi
       "#{DEFAULT_URL}/#{store_id}"
     end
 
-    def_delegators :connection, :get, :post, :put, :delete
+    def_delegators :connection, :get
+
+    def post(*args, &block)
+      raise_on_failure connection.post(*args, &block)
+    end
+
+    def put(*args, &block)
+      raise_on_failure connection.put(*args, &block)
+    end
+
+    def delete(*args, &block)
+      raise_on_failure connection.delete(*args, &block)
+    end
+
+    # Public: A helper method for POSTing an image
+    #
+    # url - the URL to POST the image to
+    # filename - the path or URL to the image to upload
+    #
+    # Returns a Faraday::Response
+    #
+    def post_image(url, filename)
+      post(url) do |req|
+        req.body = open(filename).read
+      end
+    end
+
+    private
+
+    # Private: Raises a ResponseError if the request failed
+    #
+    # response - a Faraday::Response object that is the result of a request
+    #
+    # Raises ResponseError if the request wasn't successful
+    #
+    # Returns the original response if the request was successful
+    #
+    #
+    def raise_on_failure(response)
+      if response.success?
+        response
+      else
+        raise ResponseError.new(response)
+      end
+    end
   end
 end

@@ -37,14 +37,11 @@ module EcwidApi
 
       def create(params)
         response = client.post("products/#{product.id}/combinations", params)
-
-        raise_on_failure(response) { find(response.body["id"]) }
+        find(response.body["id"])
       end
 
       def delete_all!
-        client.delete("products/#{product.id}/combinations").tap do |response|
-          raise_on_failure(response)
-        end
+        client.delete("products/#{product.id}/combinations")
       end
     end
   end

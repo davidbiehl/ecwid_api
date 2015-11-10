@@ -24,11 +24,7 @@ module EcwidApi
     #
     # Returns a Faraday::Response object
     def upload_image!(filename)
-      client.post("#{url}/image") do |req|
-        req.body = open(filename).read
-      end.tap do |response|
-        raise_on_failure(response)
-      end
+      client.post_image("#{url}/image", filename)
     end
   end
 end

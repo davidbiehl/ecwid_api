@@ -49,8 +49,7 @@ module EcwidApi
       # Returns a new Category entity
       def create(params)
         response = client.post("categories", params)
-
-        raise_on_failure(response) { |response| find(response.body["id"]) }
+        find(response.body["id"])
       end
     end
   end
