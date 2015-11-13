@@ -3,6 +3,8 @@ module EcwidApi
   # shoppers to browse the Products in the Store. Categories are organized
   # in a tree and helper methods are provided to aid in traversal.
   #
+  # @see http://api.ecwid.com/#categories
+  #
   class Category < Entity
     self.url_root = "categories"
 
