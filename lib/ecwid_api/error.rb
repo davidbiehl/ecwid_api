@@ -4,7 +4,7 @@ module EcwidApi
   class ResponseError < Error
     def initialize(response)
       if response.respond_to?(:reason_phrase)
-        super("#{response.reason_phrase} (#{response.status})")
+        super "#{response.reason_phrase} (#{response.status})\n#{response.body}"
       else
         super "The Ecwid API responded with an error (#{response.status})"
       end
