@@ -28,17 +28,18 @@ module EcwidApi
     # token    - the authorization token provided by oAuth. See the
     #            Authentication class
     #
-    def initialize(store_id, token, adapter = Faraday.default_adapter)
-      @store_id, @token, @adapter = store_id, token, adapter
+    def initialize(store_id, token, options={})
+      options[:adapter] ||= Faraday.default_adapter
+      @store_id, @token, @adapter = store_id, token, options[:adapter]
 
       @connection = Faraday.new store_url do |conn|
         conn.request  :oauth2, token, param_name: :token
         conn.request  :json
 
         conn.response :json, content_type: /\bjson$/
-        conn.response :logger
+        conn.response :logger if options[:response_logging]
 
-        conn.adapter  adapter
+        conn.adapter  options[:adapter]
       end
 
       @categories = Api::Categories.new(self)
