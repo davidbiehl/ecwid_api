@@ -1,5 +1,3 @@
-require_relative "paged_enumerator"
-
 # Public: Presents a paged Ecwid response as an Enumerator with a
 # PagedEnumerator
 #
@@ -18,8 +16,6 @@ module EcwidApi
     include Enumerable
     extend  Forwardable
 
-    def_delegator :@paged_enumerator, :each
-
     # Public: Initialize a new PagedEcwidResponse
     #
     # client - an EcwidApi::Client
@@ -31,25 +27,27 @@ module EcwidApi
       params[:limit] = 100
       params.delete(:offset)
 
-      block ||= Proc.new { |item| item }
+      @client, @path, @params, @block = client, path, params, block
+    end
 
-      response = client.get(path, params)
+    def each
+      count = 0
+      total = 0
+      params = @params
+      response = @client.get(@path, params)
 
-      @paged_enumerator = PagedEnumerator.new(response) do |response, yielder|
+      begin
         response.body["items"].each do |item|
-          yielder << block.call(item)
+          yield(@block ? @block.call(item) : item)
         end
-
         count, offset, total = %w(count offset total).map do |i|
           response.body[i].to_i
         end
 
-        if count == 0 || count + offset >= total
-          false
-        else
-          client.get(path, params.merge(offset: offset + count))
-        end
-      end
+        params = params.merge(offset: offset + count)
+        response = @client.get(@path, params)
+      end while !(count == 0 || count + offset >= total)
     end
+
   end
 end
