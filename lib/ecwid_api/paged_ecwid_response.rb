@@ -24,7 +24,7 @@ module EcwidApi
     # &block - a Block that processes each item returned in the Response
     #
     def initialize(client, path, params = {}, &block)
-      params[:limit] = 100
+      params[:limit] ||= 100
       params.delete(:offset)
 
       @client, @path, @params, @block = client, path, params, block
