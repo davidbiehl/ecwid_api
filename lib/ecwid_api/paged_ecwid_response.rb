@@ -34,9 +34,9 @@ module EcwidApi
       count = 0
       total = 0
       params = @params
-      response = @client.get(@path, params)
 
       begin
+        response = @client.get(@path, params)
         items = response.body["items"] || []
         items.each do |item|
           yield(@block ? @block.call(item) : item)
@@ -46,7 +46,6 @@ module EcwidApi
         end
 
         params = params.merge(offset: offset + count)
-        response = @client.get(@path, params)
       end while !(count == 0 || count + offset >= total)
     end
 
