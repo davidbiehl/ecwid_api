@@ -31,6 +31,15 @@ module EcwidApi
           Order.new(response.body, client: client)
         end
       end
+
+      # Public: Finds a an Order given an Ecwid VendorOrderNumber
+      #
+      # order_number - a String that is the Ecwid Vendor Order Number
+      #
+      # Returns an EcwidApi::Order if found, nil if not
+      def find_by_vendor_number(order_number)
+        all(vendorOrderNumber: order_number).first
+      end
     end
   end
 end
