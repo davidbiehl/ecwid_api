@@ -3,7 +3,7 @@ module EcwidApi
     ecwid_reader :id, :productId, :categoryId, :price, :productPrice, :weight,
                  :sku, :quantity, :shortDescription, :tax, :shipping,
                  :quantityInStock, :name, :tangible, :trackQuantity,
-                 :fixedShippingRateOnly, :imageId, :fixedShippingRate,
+                 :fixedShippingRateOnly, :imageId, :imageUrl, :fixedShippingRate,
                  :digital, :productAvailable, :couponApplied, :selectedOptions,
                  :taxes, :files
 
