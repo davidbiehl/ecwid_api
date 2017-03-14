@@ -16,6 +16,7 @@ module EcwidApi
   require_relative "ecwid_api/entity"
 
   require_relative "ecwid_api/category"
+  require_relative "ecwid_api/customer"
   require_relative "ecwid_api/order"
   require_relative "ecwid_api/order_item"
   require_relative "ecwid_api/person"
