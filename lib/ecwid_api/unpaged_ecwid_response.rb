@@ -16,7 +16,7 @@ module EcwidApi
     include Enumerable
     extend  Forwardable
 
-    def_delegator :@records, :each
+    def_delegators :@records, *Enumerable.instance_methods
 
     # Public: Initialize a new UnpagedEcwidResponse
     #
