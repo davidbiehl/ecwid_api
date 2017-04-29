@@ -21,6 +21,7 @@ module EcwidApi
   require_relative "ecwid_api/order_item"
   require_relative "ecwid_api/person"
   require_relative "ecwid_api/product_combination"
-
   require_relative "ecwid_api/product"
+  require_relative "ecwid_api/product_type"
+  require_relative "ecwid_api/product_type_attribute"
 end
