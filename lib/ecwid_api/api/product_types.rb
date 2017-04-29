@@ -1,4 +1,4 @@
-require_relative "../paged_ecwid_response"
+require_relative "../unpaged_ecwid_response"
 
 module EcwidApi
   module Api
@@ -6,8 +6,11 @@ module EcwidApi
       # Public: Get all of the ProductType objects for the Ecwid store
       #
       # Returns an Array of ProductType objects
+      # NOTE: This endpoint does not behave like other Ecwid endpoints in that
+      #       it does not return paged results.  It simply returns every
+      #       result in an array, without a wrapper with an "items" property.
       def all(params = {})
-        PagedEcwidResponse.new(client, "classes", params) do |product_type_hash|
+        UnpagedEcwidResponse.new(client, "classes") do |product_type_hash|
           ProductType.new(product_type_hash, client: client)
         end
       end

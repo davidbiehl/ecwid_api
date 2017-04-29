@@ -18,7 +18,7 @@ module Helpers
         stub.get("/categories/5") { [200, {"Content-Type" => "application/json"}, File.read("spec/fixtures/category.json") ] }
         stub.get("/orders/35") { [200, {"Content-Type" => "application/json"}, File.read("spec/fixtures/order.json") ] }
         stub.get("/orders/404") { [404, {"Content-Type" => "application/json"}, nil ] }
-        stub.get("/classes/1") { [200, {"Content-Type" => "application/json"}, File.read("spec/fixtures/order.json") ] }
+        stub.get("/classes/1") { [200, {"Content-Type" => "application/json"}, File.read("spec/fixtures/classes.json") ] }
         stub.get("/classes/404") { [404, {"Content-Type" => "application/json"}, nil ] }
       end
     end

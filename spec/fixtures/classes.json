@@ -1,10 +1,5 @@
-{
-    "total": 2,
-    "count": 2,
-    "offset": 0,
-    "limit": 100,
-    "items": [
-      {
+[
+  {
         "id": 1,
         "name": "Foo",
         "googleTaxonomy": "This > That > Other > Foos",
@@ -22,7 +17,7 @@
             }
         ]
     },
-      {
+    {
         "id": 2,
         "name": "Bar",
         "googleTaxonomy": "This > That > Other > Bars",
@@ -46,5 +41,4 @@
             }
         ]
     }
-  ]
-}
+]
