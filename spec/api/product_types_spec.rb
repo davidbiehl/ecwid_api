@@ -5,7 +5,7 @@ describe EcwidApi::Api::ProductTypes, faraday: true do
 
   describe "#all" do
     it "passes any other parameters through" do
-      expect(client).to receive(:get).with("product_types", hash_including(from_date: '1982-05-17'))
+      expect(client).to receive(:get).with("classes", hash_including(from_date: '1982-05-17'))
       subject.all(from_date: '1982-05-17')
     end
 

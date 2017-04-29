@@ -7,7 +7,7 @@ module EcwidApi
       #
       # Returns an Array of ProductType objects
       def all(params = {})
-        PagedEcwidResponse.new(client, "product_types", params) do |product_type_hash|
+        PagedEcwidResponse.new(client, "classes", params) do |product_type_hash|
           ProductType.new(product_type_hash, client: client)
         end
       end
@@ -18,7 +18,7 @@ module EcwidApi
       #
       # Returns a ProductType object, or nil if one can't be found
       def find(id)
-        response = client.get("product_types/#{id}")
+        response = client.get("classes/#{id}")
         if response.success?
           ProductType.new(response.body, client: client)
         end
@@ -32,7 +32,7 @@ module EcwidApi
       #
       # Returns a ProductType object
       def create(params)
-        response = client.post("product_types", params)
+        response = client.post("classes", params)
         find(response.body["id"])
       end
 
@@ -45,7 +45,7 @@ module EcwidApi
       #
       # Returns a ProductType object
       def update(id, params)
-        client.put("product_types/#{id}", params)
+        client.put("classes/#{id}", params)
         find(id)
       end
     end

@@ -1,5 +1,6 @@
 module EcwidApi
   class ProductType < Entity
+
     self.url_root = "classes"
 
     ecwid_reader :id, :name, :googleTaxonomy, :attributes
