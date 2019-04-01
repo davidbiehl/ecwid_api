@@ -13,7 +13,7 @@ module EcwidApi
                  :shippingPerson, :shippingOption, :additionalInfo,
                  :paymentParams, :discountInfo, :trackingNumber,
                  :paymentMessage, :extTransactionId, :affiliateId,
-                 :creditCardStatus
+                 :creditCardStatus, :acceptMarketing
 
 
     ecwid_writer :subtotal, :total, :email, :paymentMethod, :paymentModule,
