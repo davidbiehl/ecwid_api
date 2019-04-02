@@ -23,4 +23,6 @@ module EcwidApi
   require_relative "ecwid_api/product_combination"
 
   require_relative "ecwid_api/product"
+
+  require_relative "ecwid_api/profile"
 end

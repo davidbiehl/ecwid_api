@@ -20,7 +20,7 @@ module EcwidApi
     attr_reader :token
     attr_reader :adapter
 
-    attr_reader :connection, :categories, :orders, :products, :customers
+    attr_reader :connection, :profile, :categories, :orders, :products, :customers
 
     # Public: Initializes a new Client to interact with the API
     #
@@ -78,6 +78,23 @@ module EcwidApi
       post(url) do |req|
         req.body = open(filename).read
       end
+    end
+
+
+    # Public: Get a store profile info
+    #
+    # reload - explicitly reload profile info from API
+    #
+    # Returns a Profile object, or raises an error
+    def profile(reload = false)
+      return @profile if @profile.present? unless reload
+
+      response = connection.get("profile")
+      if response.success?
+        @profile = Profile.new(response.body, client: connection)
+      end
+
+      @profile
     end
 
     private
