@@ -25,4 +25,5 @@ module EcwidApi
   require_relative "ecwid_api/product"
 
   require_relative "ecwid_api/profile"
+  require_relative "ecwid_api/storage"
 end

@@ -20,7 +20,7 @@ module EcwidApi
     attr_reader :token
     attr_reader :adapter
 
-    attr_reader :connection, :profile, :categories, :orders, :products, :customers
+    attr_reader :connection, :profile, :storage, :categories, :orders, :products, :customers
 
     # Public: Initializes a new Client to interact with the API
     #
@@ -95,6 +95,22 @@ module EcwidApi
       end
 
       @profile
+    end
+
+    # Public: Get storage
+    #
+    # reload - explicitly reload storage info from API
+    #
+    # Returns a Hash, or raises an error
+    def storage(reload = false)
+      return @storage if @storage.present? unless reload
+
+      response = connection.get("storage")
+      if response.success?
+        @storage = Storage.new(response.body, client: connection)
+      end
+
+      @storage
     end
 
     private
