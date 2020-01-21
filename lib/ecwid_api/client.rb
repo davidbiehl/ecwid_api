@@ -20,7 +20,7 @@ module EcwidApi
     attr_reader :token
     attr_reader :adapter
 
-    attr_reader :connection, :profile, :storage, :categories, :orders, :products, :customers
+    attr_reader :connection, :profile, :storage, :categories, :orders, :products, :customers, :discount_coupons
 
     # Public: Initializes a new Client to interact with the API
     #
@@ -46,6 +46,7 @@ module EcwidApi
       @orders     = Api::Orders.new(self)
       @products   = Api::Products.new(self)
       @customers  = Api::Customers.new(self)
+      @discount_coupons = Api::DiscountCoupons.new(self)
     end
 
     # Public: The URL of the API for the Ecwid Store

@@ -26,4 +26,5 @@ module EcwidApi
 
   require_relative "ecwid_api/profile"
   require_relative "ecwid_api/storage"
+  require_relative "ecwid_api/discount_coupon"
 end

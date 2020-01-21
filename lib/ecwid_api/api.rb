@@ -6,5 +6,6 @@ module EcwidApi
     require_relative "api/categories"
     require_relative "api/product_combinations"
     require_relative "api/customers"
+    require_relative "api/discount_coupons" 
   end
 end
