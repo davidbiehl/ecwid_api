@@ -132,6 +132,8 @@ module EcwidApi
     def raise_on_failure(response)
       if response.success?
         response
+      elsif response.status == 404
+        raise NotFoundError.new(response)
       else
         raise ResponseError.new(response)
       end

@@ -25,7 +25,7 @@ describe EcwidApi::Api::Orders, faraday: true do
     end
 
     it "is nil when not found" do
-      expect(subject.find(404)).to be_nil
+      expect{subject.find(404)}.to raise_exception(EcwidApi::NotFoundError)
     end
   end
 end

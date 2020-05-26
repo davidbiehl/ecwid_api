@@ -10,6 +10,7 @@ describe EcwidApi::Client do
   describe "#get", faraday: true do
     it "delegates to the Faraday connection" do
       expect(subject.send(:connection)).to receive(:get).with("categories", parent: 1)
+        .and_return(double(success?: true, status: 200))
 
       subject.get "categories", parent: 1
     end

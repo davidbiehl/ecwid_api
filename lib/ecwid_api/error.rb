@@ -10,4 +10,6 @@ module EcwidApi
       end
     end
   end
+
+  class NotFoundError< ResponseError; end;
 end
