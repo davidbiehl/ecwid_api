@@ -3,7 +3,7 @@
 A gem to interface with the Ecwid REST APIs.
 
 [![Code Climate](https://codeclimate.com/github/davidbiehl/ecwid_api.png)](https://codeclimate.com/github/davidbiehl/ecwid_api)
-[![Build Status](https://travis-ci.org/davidbiehl/ecwid_api.svg?branch=master)](https://travis-ci.org/davidbiehl/ecwid_api)
+[![Build Status](https://travis-ci.org/platehub/ecwid_api.svg?branch=master)](https://travis-ci.org/platehub/ecwid_api)
 
 ## API v3 Warning!
 
