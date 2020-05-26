@@ -54,7 +54,9 @@ module EcwidApi
       "#{DEFAULT_URL}/#{store_id}"
     end
 
-    def_delegators :connection, :get
+    def get(*args, &block)
+      raise_on_failure connection.get(*args, &block)
+    end
 
     def post(*args, &block)
       raise_on_failure connection.post(*args, &block)
