@@ -15,7 +15,7 @@ describe EcwidApi::Client do
     end
 
     it "returns a Faraday::Response" do
-      subject.get("categories", parent: 1).is_a?(Faraday::Response).should be_true
+      expect(subject.get("categories", parent: 1).is_a?(Faraday::Response)).to be true
     end
   end
 end

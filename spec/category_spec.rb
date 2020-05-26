@@ -27,7 +27,7 @@ describe EcwidApi::Category, faraday: true do
 
       it "returns nil" do
         expect(client.categories).to_not receive(:find)
-        subject.parent.should be_nil
+        expect(subject.parent).to be nil
       end
     end
   end

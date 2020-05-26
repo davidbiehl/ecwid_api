@@ -10,7 +10,7 @@ describe EcwidApi::OAuth do
     end
   end
 
-  its(:oauth_url) { should == "https://my.ecwid.com/api/oauth/authorize?client_id=client_id&scope=scope&response_type=code&redirect_uri=https%3A%2F%2Fexample.com%2Foauth" }
+  its(:oauth_url) { eq "https://my.ecwid.com/api/oauth/authorize?client_id=client_id&scope=scope&response_type=code&redirect_uri=https%3A%2F%2Fexample.com%2Foauth" }
 
   describe "#access_token(code)" do
     let(:response) do
@@ -30,11 +30,11 @@ describe EcwidApi::OAuth do
     end
 
     it "returns an object that has the access_token" do
-      subject.access_token("code").access_token.should == "the_token"
+      expect(subject.access_token("code").access_token).to eq "the_token"
     end
 
     it "returns an object that has the store_id" do
-      subject.access_token("code").store_id.should == "12345"
+      expect(subject.access_token("code").store_id).to eq "12345"
     end
   end
 end

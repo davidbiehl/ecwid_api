@@ -66,7 +66,7 @@ module EcwidApi
     def fulfillment_status=(status)
       status = status.to_s.upcase
       unless VALID_FULFILLMENT_STATUSES.include?(status)
-        raise Error("#{status} is an invalid fullfillment status")
+        raise Error.new("#{status} is an invalid fullfillment status")
       end
       super(status)
     end

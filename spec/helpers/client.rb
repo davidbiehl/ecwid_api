@@ -28,5 +28,16 @@ module Helpers
         builder.adapter :test, faraday_stubs
       end
     end
+
+    # Public: Returns pagination response for empty pages. To stub parameterized requests
+    def empty_pagination_response
+      double(body:{
+        "total"=> 2,
+        "count"=> 2,
+        "offset"=> 0,
+        "limit"=> 100,
+        "items"=> []
+      })
+    end
   end
 end

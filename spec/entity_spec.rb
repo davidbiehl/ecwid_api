@@ -34,42 +34,42 @@ describe EcwidApi::Entity do
   subject { EntitySubject.new(data) }
 
   describe "::url_root" do
-    its(:url) { should == "stuff/123" }
+    its(:url) { eq "stuff/123" }
 
     context "with a proc" do
       subject { EntityUrlSubject.new(data) }
-      its(:url) { should == "parent/456/and/123" }
+      its(:url) { eq "parent/456/and/123" }
     end
   end
 
 
   describe "#[]" do
     it "gets data with a symbol key" do
-      subject[:id].should == 123
+      expect(subject[:id]).to eq 123
     end
 
     it "gets data with a string key" do
-      subject["parentId"].should == 456
+      expect(subject["parentId"]).to eq 456
     end
 
     it "get nil for unknown data" do
-      subject["whatever"].should be_nil
+      expect(subject["whatever"]).to be nil
     end
 
     it "gets attributes not revealed by ecwid_reader or ecwid_accessor" do
-      subject["hidden"].should == "tee hee"
+      expect(subject["hidden"]).to eq "tee hee"
     end
   end
 
   describe "overrides" do
-    its(:override) { should == "UPCASE ME" }
+    its(:override) { eq "UPCASE ME" }
   end
 
   describe "accessors" do
 
     describe "::ecwid_reader" do
       it "makes data accessible with a snake cased method" do
-        subject.parent_id.should == 456
+        expect(subject.parent_id).to eq 456
       end
 
       it "doesn't have a writer" do
@@ -80,7 +80,7 @@ describe EcwidApi::Entity do
     describe "::ecwid_writer" do
       it "creates a writer method" do
         subject.write_only = "yee haw!"
-        subject["writeOnly"].should == "yee haw!"
+        expect(subject["writeOnly"]).to eq "yee haw!"
       end
 
       it "doesn't have a reader" do
@@ -91,13 +91,13 @@ describe EcwidApi::Entity do
     describe "::ecwid_accessor" do
       it "creates a reader and a writer" do
         subject.the_status = "MATURE"
-        subject.the_status.should == "MATURE"
+        expect(subject.the_status).to eq "MATURE"
       end
     end
 
     describe "without an accessor" do
       it "is accessible with []" do
-        subject[:hidden].should == "tee hee"
+        expect(subject[:hidden]).to eq "tee hee"
       end
 
       it "doesn't have an access method" do
