@@ -1,3 +1,11 @@
+# No Longer Maintained
+
+I am no longer able to maintain this project. I recommend using one of
+the many [forks](https://github.com/davidbiehl/ecwid_api/network) of this repo
+if you are looking for additional features.
+
+Please email me if you are interested in maintaining the Ruby gem.
+
 # EcwidApi
 
 A gem to interface with the Ecwid REST APIs.
