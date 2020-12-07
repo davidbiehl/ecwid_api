@@ -1,10 +1,8 @@
-# No Longer Maintained
+# New Maintainer
 
-I am no longer able to maintain this project. I recommend using one of
-the many [forks](https://github.com/davidbiehl/ecwid_api/network) of this repo
-if you are looking for additional features.
+The Ecwid API gem is now being maintained by [Vishal Zambre](https://github.com/vishalzambre)
+on the following fork: https://github.com/vishalzambre/ecwid_api
 
-Please email me if you are interested in maintaining the Ruby gem.
 
 # EcwidApi
 
