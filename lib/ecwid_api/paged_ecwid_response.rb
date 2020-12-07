@@ -36,13 +36,16 @@ module EcwidApi
       response = client.get(path, params)
 
       @paged_enumerator = PagedEnumerator.new(response) do |response, yielder|
-        response.body["items"].each do |item|
-          yielder << block.call(item)
-        end
-
+        
         count, offset, total = %w(count offset total).map do |i|
           response.body[i].to_i
         end
+        
+        if count > 0
+          response.body["items"].each do |item|
+            yielder << block.call(item)
+          end
+        end  
 
         if count == 0 || count + offset >= total
           false
