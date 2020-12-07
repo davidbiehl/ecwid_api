@@ -51,7 +51,7 @@ module EcwidApi
 
     # Public: Returns the shipping person
     #
-    # If there isn't a shipping_person, then it is assumed to be the 
+    # If there isn't a shipping_person, then it is assumed to be the
     # billing_person
     #
     def shipping_person
@@ -66,7 +66,7 @@ module EcwidApi
     def fulfillment_status=(status)
       status = status.to_s.upcase
       unless VALID_FULFILLMENT_STATUSES.include?(status)
-        raise Error("#{status} is an invalid fullfillment status")
+        raise ::StandardError.new("#{status} is an invalid fullfillment status")
       end
       super(status)
     end

@@ -1,0 +1,44 @@
+[
+  {
+        "id": 1,
+        "name": "Foo",
+        "googleTaxonomy": "This > That > Other > Foos",
+        "attributes": [{
+                "id": 111,
+                "name": "UPC",
+                "type": "UPC",
+                "show": "DESCR"
+            },
+            {
+                "id": 222,
+                "name": "Brand",
+                "type": "BRAND",
+                "show": "DESCR"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Bar",
+        "googleTaxonomy": "This > That > Other > Bars",
+        "attributes": [{
+                "id": 333,
+                "name": "UPC",
+                "type": "UPC",
+                "show": "DESCR"
+            },
+            {
+                "id": 444,
+                "name": "Brand",
+                "type": "BRAND",
+                "show": "DESCR"
+            },
+            {
+                "id": 555,
+                "name": "Blah",
+                "type": "BRAND",
+                "show": "NOTSHOW"
+            }
+        ]
+    }
+]

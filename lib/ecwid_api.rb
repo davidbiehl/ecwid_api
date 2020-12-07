@@ -16,10 +16,12 @@ module EcwidApi
   require_relative "ecwid_api/entity"
 
   require_relative "ecwid_api/category"
+  require_relative "ecwid_api/customer"
   require_relative "ecwid_api/order"
   require_relative "ecwid_api/order_item"
   require_relative "ecwid_api/person"
   require_relative "ecwid_api/product_combination"
-
   require_relative "ecwid_api/product"
+  require_relative "ecwid_api/product_type"
+  require_relative "ecwid_api/product_type_attribute"
 end

@@ -26,7 +26,7 @@ describe EcwidApi::PagedEnumerator do
   end
 
   it "contains the whole result set" do
-    subject.to_a.should == %w(1 2 3 4 5 6)
+    expect(subject.to_a).to eq %w(1 2 3 4 5 6)
   end
 
   it "iterates over each response once" do

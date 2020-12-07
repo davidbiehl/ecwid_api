@@ -1,0 +1,48 @@
+{
+  "total": 5,
+  "count": 5,
+  "offset": 0,
+  "limit": 100,
+  "items": [
+    {
+      "id": 1,
+      "name": "Abe Doe",
+      "email": "abe@example.com",
+      "totalOrderCount": 1,
+      "customerGroupId": 0,
+      "customerGroupName": "General"
+    },
+    {
+      "id": 2,
+      "name": "Bob Doe",
+      "email": "bob@example.com",
+      "totalOrderCount": 2,
+      "customerGroupId": 0,
+      "customerGroupName": "General"
+    },
+    {
+      "id": 3,
+      "name": "Chris Doe",
+      "email": "chris@example.com",
+      "totalOrderCount": 3,
+      "customerGroupId": 0,
+      "customerGroupName": "General"
+    },
+    {
+      "id": 4,
+      "name": "Debby Doe",
+      "email": "debby@example.com",
+      "totalOrderCount": 0,
+      "customerGroupId": 0,
+      "customerGroupName": "General"
+    },
+    {
+      "id": 5,
+      "name": "Ellen Doe",
+      "email": "ellen@example.com",
+      "totalOrderCount": 0,
+      "customerGroupId": 0,
+      "customerGroupName": "General"
+    }
+  ]
+}
